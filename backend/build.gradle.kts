@@ -8,19 +8,21 @@ plugins {
 }
 
 dependencies {
+    compileOnly("org.projectlombok:lombok:1.18.36")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-test")
     implementation("mysql:mysql-connector-java:8.0.27")
+    annotationProcessor("org.projectlombok:lombok:1.18.36")
+    testCompileOnly("org.projectlombok:lombok:1.18.36")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.0")
 }
 
 springBoot {
-    mainClass.set("com.antarticuno.MainApplication") // Replace with your main class path
+    mainClass.set("com.antarticuno.dmax.MainApplication") // Replace with your main class path
 }
 
 tasks.register<Exec>("buildFrontend") {

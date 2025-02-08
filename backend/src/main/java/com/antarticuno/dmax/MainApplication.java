@@ -1,4 +1,4 @@
-package com.antarticuno;
+package com.antarticuno.dmax;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
