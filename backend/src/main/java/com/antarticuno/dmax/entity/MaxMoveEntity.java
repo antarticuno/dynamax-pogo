@@ -1,6 +1,10 @@
 package com.antarticuno.dmax.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -13,6 +17,10 @@ import java.util.Objects;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 @Table(name = "max_move", schema = "pogo", catalog = "")
 public class MaxMoveEntity {
     @Basic
@@ -31,17 +39,4 @@ public class MaxMoveEntity {
     @Id
     @Column(name = "move_key")
     private int moveKey;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MaxMoveEntity that = (MaxMoveEntity) o;
-        return power == that.power && pokemonKey == that.pokemonKey && moveKey == that.moveKey && Objects.equals(type, that.type) && Objects.equals(name, that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(type, name, power, pokemonKey, moveKey);
-    }
 }

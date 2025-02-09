@@ -26,6 +26,11 @@ public class PokemonManager {
         pokemonManagerService.savePokemonIntoDb(pokemonId);
     }
 
+    @PostMapping("/dynamax")
+    public void dynamaxEnablePokemon(@RequestParam Integer pokemonId) {
+        pokemonManagerService.upgradePokemonToDynamax(pokemonId);
+    }
+
     // FIXME
     @DeleteMapping
     public void deletePokemon(@RequestParam Integer pokemonId) {
