@@ -21,18 +21,22 @@ export default function AttackerSection() {
 
   return <>
     <table>
-      <tr>
-        <th>Pokemon</th>
-        <th>Move Name</th>
-        <th>Damage Amount</th>
-      </tr>
-      {attackerPokemon.map((attacker => {
-        return <tr>
-          <td>{attacker.pokemonName}</td>
-          <td>{attacker.maxMoveName}</td>
-          <td>{attacker.damage}</td>
-        </tr>;
-      }))}
+      <thead>
+        <tr>
+          <th>Pokemon</th>
+          <th>Move Name</th>
+          <th>Damage Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {attackerPokemon.map(((attacker, idx) => {
+          return <tr key={`attacker-${idx}`}>
+            <td>{attacker.pokemonName}</td>
+            <td>{attacker.maxMoveName}</td>
+            <td>{attacker.damage}</td>
+          </tr>;
+        }))}
+      </tbody>
     </table>
   </>;
 }

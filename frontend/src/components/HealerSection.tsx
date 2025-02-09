@@ -19,16 +19,20 @@ export default function HealerSection() {
 
   return <>
     <table>
-      <tr>
-        <th>Pokemon</th>
-        <th>Healing Amount</th>
-      </tr>
-      {healerPokemon.map((healer => {
-        return <tr>
-          <td>{healer.pokemonName}</td>
-          <td>{healer.maxHealingAmount}</td>
-        </tr>;
-      }))}
+      <thead>
+        <tr>
+          <th>Pokemon</th>
+          <th>Healing Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {healerPokemon.map(((healer, idx) => {
+          return <tr key={`healer-${idx}`}>
+            <td>{healer.pokemonName}</td>
+            <td>{healer.maxHealingAmount}</td>
+          </tr>;
+        }))}
+      </tbody>
     </table>
   </>;
 }

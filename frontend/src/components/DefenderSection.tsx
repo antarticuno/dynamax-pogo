@@ -24,8 +24,8 @@ export default function DefenderSection() {
     for (const defenderName in defenderMap) {
       if (defenderMap.hasOwnProperty(defenderName)) {
         const movesList = defenderMap[defenderName];
-        movesList.forEach(move =>
-          resultRow.push(<tr>
+        movesList.forEach((move, idx) =>
+          resultRow.push(<tr key={`defender-${defenderName}-${idx}`}>
             <td>{move.pokemonName}</td>
             <td>{move.moveName}</td>
             <td>{move.damage}</td>
@@ -38,12 +38,16 @@ export default function DefenderSection() {
 
   return <>
     <table>
-      <tr>
-        <th>Pokemon</th>
-        <th>Move Name</th>
-        <th>Damage Amount</th>
-      </tr>
-      {generateDefenderRows(defenderPokemon)}
+      <thead>
+        <tr>
+          <th>Pokemon</th>
+          <th>Move Name</th>
+          <th>Damage Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {generateDefenderRows(defenderPokemon)}
+      </tbody>
     </table>
   </>;
 }
