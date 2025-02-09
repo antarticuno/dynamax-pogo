@@ -1,8 +1,19 @@
 import HealerPokemonInterface from "../types/HealerPokemonInterface";
 import AttackerPokemonInterface from "../types/AttackerPokemonInterface";
 import DefenderPokemonMapInterface from "../types/DefenderPokemonMapInterface";
+import PokemonInterface from "../types/PokemonInterface";
 
 const backendUrl = 'http://localhost:8080';
+
+const fetchPokemon = async (pokemonId: number) => {
+  let queryUrl = `${backendUrl}/api/v1/manage?pokemonId=${pokemonId}`;
+  const response = await fetch(queryUrl);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const data: PokemonInterface[] = await response.json();
+  return data;
+}
 
 /**
  * Fetch the list of healer pokemon
@@ -39,6 +50,7 @@ const fetchDefenderPokemon = async (pokemonId: number) => {
 };
 
 export {
+  fetchPokemon,
   fetchHealerPokemon,
   fetchAttackerPokemon,
   fetchDefenderPokemon

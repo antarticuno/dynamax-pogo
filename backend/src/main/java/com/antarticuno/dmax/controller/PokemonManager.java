@@ -1,6 +1,9 @@
 package com.antarticuno.dmax.controller;
 
+import com.antarticuno.dmax.entity.PokemonEntity;
+import com.antarticuno.dmax.model.PokemonDTO;
 import com.antarticuno.dmax.service.PokemonManagerService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 @RequestMapping("/api/v1/manage")
 @RestController
@@ -17,12 +22,33 @@ public class PokemonManager {
     private PokemonManagerService pokemonManagerService;
 
     /**
+     * Searches for pokemon off of the database
+     * @param pokemonId the pokemon to search for
+     * @return the pokemon if found
+     */
+    @GetMapping
+    public Optional<PokemonDTO> getPokemonFromDb(@RequestParam Integer pokemonId) {
+        return pokemonManagerService.getPokemonFromDb(pokemonId)
+                .map(pokemonEntity ->
+                        PokemonDTO.builder()
+                                .pokemonName(pokemonEntity.getName())
+                                .pokemonId(pokemonEntity.getPokemonKey())
+                                .attack(pokemonEntity.getAttack())
+                                .defense(pokemonEntity.getDefense())
+                                .stamina(pokemonEntity.getStamina())
+                                .primaryType(pokemonEntity.getType1())
+                                .secondaryType(pokemonEntity.getType2())
+                                .imgUrl(pokemonEntity.getImgUrl())
+                                .build());
+    }
+
+    /**
      * Searches for pokemon from the global API
      * @param pokemonId the pokemon id in question
      */
     @GetMapping("/fetch")
-    public void getPokemon(@RequestParam Integer pokemonId) {
-        pokemonManagerService.getPokemonFromApi(pokemonId);
+    public Optional<JSONObject> getPokemonFromApi(@RequestParam Integer pokemonId) {
+        return pokemonManagerService.getPokemonFromApi(pokemonId);
     }
 
     /**
