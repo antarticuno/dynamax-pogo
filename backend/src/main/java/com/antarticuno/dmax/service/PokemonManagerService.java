@@ -8,7 +8,6 @@ import com.antarticuno.dmax.repository.MoveRepository;
 import com.antarticuno.dmax.repository.PokemonRepository;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.tuple.Pair;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +28,7 @@ import static java.util.Map.entry;
 @Service
 public class PokemonManagerService {
 
+    // Public POGO Api URL
     protected static final String API_URL = "https://pokemon-go-api.github.io/pokemon-go-api";
     protected static final String POKEDEX_API = "/api/pokedex";
 
@@ -58,6 +58,11 @@ public class PokemonManagerService {
         return response.body();
     }
 
+    /**
+     * Searches for the pokemon in the database
+     * @param pokedexId the pokemon in question
+     * @return the pokemon if found
+     */
     public Optional<PokemonEntity> getPokemonFromDb(Integer pokedexId) {
         return pokemonRepository.findById(pokedexId);
     }
@@ -78,6 +83,10 @@ public class PokemonManagerService {
         return Optional.empty();
     }
 
+    /**
+     * Fetch the given pokemon from the API, then save it into the database
+     * @param pokedexId the pokemon in question
+     */
     public void savePokemonIntoDb(Integer pokedexId) {
         if (getPokemonFromDb(pokedexId).isPresent()) {
             throw new UnsupportedOperationException("Can't save this pokemon because it already exists. Try deleting it first.");
@@ -122,6 +131,7 @@ public class PokemonManagerService {
         }
     }
 
+    // Gigantamax pokemon mapped to their gmax moves + type
     protected final static Map<String, Pair<String, String>> gigantamaxPokemonMoves = Map.ofEntries(
             entry("venusaur", Pair.of("G-Max Vine Lash", "grass")),
             entry("charizard", Pair.of("G-Max Wildfire", "fire")),
@@ -157,6 +167,7 @@ public class PokemonManagerService {
             entry("urshifu", Pair.of("G-Max One Blow", "dark"))
     );
 
+    // The list of max moves mapped by type
     protected final Map<String, String> maxMoveNames = Map.ofEntries(
             entry("normal", "Max Strike"),
             entry("grass", "Max Overgrowth"),
@@ -178,6 +189,10 @@ public class PokemonManagerService {
             entry("electric", "Max Lightning")
     );
 
+    /**
+     * Upgrade a pokemon already in the database to be max_available and have max moves.
+     * @param pokemonId the pokemon in question
+     */
     public void upgradePokemonToDynamax(Integer pokemonId) {
         final PokemonEntity pokemon = getPokemonFromDb(pokemonId).orElseThrow(() -> new RuntimeException("Pokemon not found."));
         pokemon.setMaxAvailable(true);
@@ -205,6 +220,12 @@ public class PokemonManagerService {
         maxMoveRepository.saveAll(maxMoves);
     }
 
+    /**
+     * Helper for processing a JSON object to extract fast/charged attacks into MoveEntities.
+     * @param jsonObject  the json object in question
+     * @param pokemonId   the pokemon that this is for
+     * @return a list of generated MoveEntities
+     */
     protected List<MoveEntity> generateMoveList(JSONObject jsonObject, Integer pokemonId) {
         final Iterable<String> keys = jsonObject.keySet();
         final List<MoveEntity> moves = new ArrayList<>();
