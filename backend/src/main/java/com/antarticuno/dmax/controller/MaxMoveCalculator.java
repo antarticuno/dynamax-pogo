@@ -30,7 +30,8 @@ public class MaxMoveCalculator {
 
     // FIXME
     @GetMapping("/guard")
-    public void bestDefendersForBoss(Integer bossPokemonId) {
+    public void bestDefendersForBoss(@RequestParam Integer bossPokemonId,
+                                     @RequestParam(defaultValue = "5") Integer limit) {
 
     }
 

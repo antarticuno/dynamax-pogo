@@ -34,6 +34,7 @@ import java.util.Objects;
                 "left join type_matchup tm1 on (max_move.type = tm1.attack_type and boss.type_1 = tm1.defense_type) \n" +
                 "left join type_matchup tm2 on (max_move.type = tm2.attack_type and boss.type_2 = tm2.defense_type) \n" +
                 "where boss.pokemon_key = ?1\n" +
+                "and attacker.max_available = true\n" +
                 "order by damage desc",
         resultSetMapping = "attacker_dto"
 )

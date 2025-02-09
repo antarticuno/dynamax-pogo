@@ -17,3 +17,29 @@ This is a website for displaying dynamax/gigantamax battle information. The Dyna
 ```
 curl -m 70 -X POST http://localhost:8080/api/v1/manage?pokemonId=[1-1008]
 ```
+
+## Curls for Current Dynamax/Gigantamax Pokemon
+```
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=3
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=6
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=9
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=68
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=94
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=99
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=131
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=144
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=145
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=146
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=376
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=521
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=530
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=555
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=615
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=812
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=815
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=818
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=820
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=832
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=849
+curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=870
+```
