@@ -1,16 +1,54 @@
 package com.antarticuno.dmax.entity;
 
+import com.antarticuno.dmax.model.AttackerPokemonDTO;
 import lombok.Data;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 import java.util.Objects;
 
+@NamedNativeQuery(
+        name = "find_attacker_dto",
+        query = "select floor(\n" +
+                "  (attacker.attack / boss.defense) * \n" +
+                "  (power / 2) * \n" +
+                "  (case when attacker.type_1 = max_move.type or coalesce(attacker.type_2, '') = max_move.type then 1.2 else 1 end) *\n" +
+                "  coalesce(tm1.multiplier, 1) *\n" +
+                "  coalesce(tm2.multiplier, 1)\n" +
+                ") as damage, \n" +
+                "attacker.pokemon_key as pokemon_id, \n" +
+                "(case when max_move.name like 'G-Max%' then concat('gigantamax ', attacker.name) else attacker.name end) as attacker_name, \n" +
+                "max_move.name as max_move_name\n" +
+                "from pokemon attacker \n" +
+                "join max_move using (pokemon_key)\n" +
+                "cross join pokemon boss\n" +
+                "left join type_matchup tm1 on (max_move.type = tm1.attack_type and boss.type_1 = tm1.defense_type) \n" +
+                "left join type_matchup tm2 on (max_move.type = tm2.attack_type and boss.type_2 = tm2.defense_type) \n" +
+                "where boss.pokemon_key = ?1\n" +
+                "order by damage desc",
+        resultSetMapping = "attacker_dto"
+)
+@SqlResultSetMapping(
+        name = "attacker_dto",
+        classes = @ConstructorResult(
+                targetClass = AttackerPokemonDTO.class,
+                columns = {
+                        @ColumnResult(name = "pokemon_id", type = Integer.class),
+                        @ColumnResult(name = "attacker_name", type = String.class),
+                        @ColumnResult(name = "max_move_name", type = String.class),
+                        @ColumnResult(name = "damage", type = Integer.class)
+                }
+        )
+)
 @Data
 @Entity
 @Table(name = "pokemon", schema = "pogo", catalog = "")
