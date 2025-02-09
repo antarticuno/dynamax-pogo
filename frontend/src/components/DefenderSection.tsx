@@ -4,13 +4,35 @@ import {useSearchParams} from "react-router-dom";
 import DefenderPokemonMapInterface from "../types/DefenderPokemonMapInterface";
 import * as d3 from 'd3';
 import styled from "styled-components";
+import {Shield01Icon} from "hugeicons-react";
+
+const styleThreshold = 700;
 
 const DefenderSectionContainer = styled.div`
+  width: 30%;
   max-height: 100vh;
   overflow-y: scroll;
+
+  h1 {
+    margin: 0;
+    padding: 5px 10px;
+    background-color: #242424;
+    position: sticky;
+    top: 0px;
+
+    svg {
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  }
+  
+  @media(max-width: ${styleThreshold}px) {
+    width: 100%;
+  }
   
   table {
     border-spacing: 0;
+    width: 100%;
   }
 `;
 
@@ -59,6 +81,10 @@ export default function DefenderSection() {
   };
 
   return <DefenderSectionContainer>
+    <h1>
+      <Shield01Icon />
+      Guard
+    </h1>
     <table>
       <thead>
       <tr>

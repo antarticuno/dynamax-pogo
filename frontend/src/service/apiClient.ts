@@ -11,7 +11,7 @@ const fetchPokemon = async (pokemonId: number) => {
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-  const data: PokemonInterface[] = await response.json();
+  const data: PokemonInterface = await response.json();
   return data;
 }
 

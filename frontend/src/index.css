@@ -17,3 +17,19 @@
   text-transform: capitalize;
 }
 
+.center-align {
+  text-align: center;
+}
+
+.right-align {
+  text-align: right;
+}
+
+.left-align {
+  text-align: left;
+}
+
+.bold {
+  font-weight: bold;
+}
+
