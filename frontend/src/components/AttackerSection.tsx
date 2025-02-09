@@ -25,13 +25,13 @@ export default function AttackerSection() {
         <tr>
           <th>Pokemon</th>
           <th>Move Name</th>
-          <th>Damage Amount</th>
+          <th>Damage Dealt</th>
         </tr>
       </thead>
       <tbody>
         {attackerPokemon.map(((attacker, idx) => {
           return <tr key={`attacker-${idx}`}>
-            <td>{attacker.pokemonName}</td>
+            <td className="capitalize">{attacker.pokemonName}</td>
             <td>{attacker.maxMoveName}</td>
             <td>{attacker.damage}</td>
           </tr>;

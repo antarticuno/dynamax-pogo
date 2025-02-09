@@ -22,13 +22,13 @@ export default function HealerSection() {
       <thead>
         <tr>
           <th>Pokemon</th>
-          <th>Healing Amount</th>
+          <th>Damage Healed</th>
         </tr>
       </thead>
       <tbody>
         {healerPokemon.map(((healer, idx) => {
           return <tr key={`healer-${idx}`}>
-            <td>{healer.pokemonName}</td>
+            <td className="capitalize">{healer.pokemonName}</td>
             <td>{healer.maxHealingAmount}</td>
           </tr>;
         }))}

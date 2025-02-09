@@ -1,5 +1,5 @@
 :root {
-  font-family: Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -12,3 +12,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.capitalize {
+  text-transform: capitalize;
+}
+
