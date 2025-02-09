@@ -1,6 +1,7 @@
 package com.antarticuno.dmax.entity;
 
 import com.antarticuno.dmax.model.AttackerPokemonDTO;
+import com.antarticuno.dmax.model.DefenderPokemonDTO;
 import lombok.Data;
 
 import javax.persistence.Basic;
@@ -46,6 +47,43 @@ import java.util.Objects;
                         @ColumnResult(name = "pokemon_id", type = Integer.class),
                         @ColumnResult(name = "attacker_name", type = String.class),
                         @ColumnResult(name = "max_move_name", type = String.class),
+                        @ColumnResult(name = "damage", type = Integer.class)
+                }
+        )
+)
+@NamedNativeQuery(
+        name = "find_defender_dto",
+        query = "select floor(\n" +
+                "  (boss.attack / defender.defense) * \n" +
+                "  (power / 2) * \n" +
+                "  (case when boss.type_1 = move.type or coalesce(boss.type_2, '') = move.type then 1.2 else 1 end) *\n" +
+                "  coalesce(tm1.multiplier, 1) *\n" +
+                "  coalesce(tm2.multiplier, 1)\n" +
+                ") as damage,\n" +
+                "move.name as move_name,\n" +
+                "defender.name as defender_name,\n" +
+                "defender.stamina as defender_stamina,\n" +
+                "defender.pokemon_key as pokemon_id\n" +
+                "from pokemon boss\n" +
+                "join move using (pokemon_key)\n" +
+                "cross join pokemon defender\n" +
+                "left join type_matchup tm1 on (move.type = tm1.attack_type and defender.type_1 = tm1.defense_type) \n" +
+                "left join type_matchup tm2 on (move.type = tm2.attack_type and defender.type_2 = tm2.defense_type) \n" +
+                "where move.variant = 'CHARGED'\n" +
+                "and boss.pokemon_key = ?1\n" +
+                "and defender.max_available = true\n" +
+                "order by defender.name, damage asc",
+        resultSetMapping = "defender_dto"
+)
+@SqlResultSetMapping(
+        name = "defender_dto",
+        classes = @ConstructorResult(
+                targetClass = DefenderPokemonDTO.class,
+                columns = {
+                        @ColumnResult(name = "pokemon_id", type = Integer.class),
+                        @ColumnResult(name = "defender_name", type = String.class),
+                        @ColumnResult(name = "defender_stamina", type = Integer.class),
+                        @ColumnResult(name = "move_name", type = String.class),
                         @ColumnResult(name = "damage", type = Integer.class)
                 }
         )

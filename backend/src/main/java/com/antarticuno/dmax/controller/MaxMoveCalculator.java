@@ -1,6 +1,7 @@
 package com.antarticuno.dmax.controller;
 
 import com.antarticuno.dmax.model.AttackerPokemonDTO;
+import com.antarticuno.dmax.model.DefenderPokemonDTO;
 import com.antarticuno.dmax.model.HealerPokemonDTO;
 import com.antarticuno.dmax.repository.PokemonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * For handling the requests for max move calculations
@@ -28,11 +32,12 @@ public class MaxMoveCalculator {
         return pokemonRepository.findBestAttackers(bossPokemonId, PageRequest.of(0, limit));
     }
 
-    // FIXME
     @GetMapping("/guard")
-    public void bestDefendersForBoss(@RequestParam Integer bossPokemonId,
-                                     @RequestParam(defaultValue = "5") Integer limit) {
-
+    public Map<String, List<DefenderPokemonDTO>> bestDefendersForBoss(@RequestParam Integer bossPokemonId,
+                                                        @RequestParam(defaultValue = "-1") Integer limit) {
+        return pokemonRepository.findBestDefenders(bossPokemonId, PageRequest.of(0, limit < 0 ? Integer.MAX_VALUE : limit))
+                .stream()
+                .collect(Collectors.groupingBy(DefenderPokemonDTO::getPokemonName));
     }
 
     /**
