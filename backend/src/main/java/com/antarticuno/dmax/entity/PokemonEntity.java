@@ -82,7 +82,6 @@ public class PokemonEntity {
     @Column(name = "max_available")
     private boolean maxAvailable;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "pokemon_key")
     private int pokemonKey;

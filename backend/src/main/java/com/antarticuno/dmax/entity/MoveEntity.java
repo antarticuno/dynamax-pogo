@@ -32,6 +32,10 @@ public class MoveEntity {
     @Column(name = "move_key")
     private int moveKey;
 
+    @Basic
+    @Column(name = "variant")
+    private String variant;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
