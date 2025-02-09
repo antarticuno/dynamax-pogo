@@ -3,10 +3,12 @@ package com.antarticuno.dmax.service;
 import com.antarticuno.dmax.entity.MaxMoveEntity;
 import com.antarticuno.dmax.entity.MoveEntity;
 import com.antarticuno.dmax.entity.PokemonEntity;
+import com.antarticuno.dmax.model.PokemonDTO;
 import com.antarticuno.dmax.repository.MaxMoveRepository;
 import com.antarticuno.dmax.repository.MoveRepository;
 import com.antarticuno.dmax.repository.PokemonRepository;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +60,19 @@ public class PokemonManagerService {
         return response.body();
     }
 
+    public PokemonDTO mapPokemonToDTO(PokemonEntity pokemonEntity) {
+        return PokemonDTO.builder()
+                        .pokemonName(pokemonEntity.getName())
+                        .pokemonId(pokemonEntity.getPokemonKey())
+                        .attack(pokemonEntity.getAttack())
+                        .defense(pokemonEntity.getDefense())
+                        .stamina(pokemonEntity.getStamina())
+                        .primaryType(pokemonEntity.getType1())
+                        .secondaryType(pokemonEntity.getType2())
+                        .imgUrl(pokemonEntity.getImgUrl())
+                        .build();
+    }
+
     /**
      * Searches for the pokemon in the database
      * @param pokedexId the pokemon in question
@@ -65,6 +80,14 @@ public class PokemonManagerService {
      */
     public Optional<PokemonEntity> getPokemonFromDb(Integer pokedexId) {
         return pokemonRepository.findById(pokedexId);
+    }
+
+    /**
+     * Gets all of the pokemon from the db
+     * @return
+     */
+    public List<PokemonEntity> getAllPokemonFromDb() {
+        return IteratorUtils.toList(pokemonRepository.findAll().iterator());
     }
 
     /**

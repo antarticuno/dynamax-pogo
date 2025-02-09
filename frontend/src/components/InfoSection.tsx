@@ -1,6 +1,6 @@
 import {useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {fetchPokemon} from "../service/apiClient";
+import {fetchAllPokemon, fetchPokemon} from "../service/apiClient";
 import PokemonInterface from "../types/PokemonInterface";
 import styled from "styled-components";
 
@@ -15,6 +15,11 @@ const InfoSectionContainer = styled.div`
 
   h1 {
     margin: 0;
+    
+    &.clickable:hover {
+      color: #FFF;
+      cursor: pointer;
+    }
   }
 
   h3 {
@@ -61,31 +66,53 @@ const PokemonImage = styled.img`
 `;
 
 export default function InfoSection() {
-  const [searchParams, _setSearchParams] = useSearchParams();
-  const pokemonIdParam = searchParams.get('pokemonId');
-  const [pokemonId, _setPokemonId] = useState<number | undefined>(!!pokemonIdParam ? Number(pokemonIdParam) : undefined);
-  const [pokemon, setPokemon] = useState<PokemonInterface | undefined>(undefined);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [isSelecting, setIsSelecting] = useState<boolean>(true);
+  const [allPokemon, setAllPokemon] = useState<PokemonInterface[]>([]);
+  const [currentPokemon, setCurrentPokemon] = useState<PokemonInterface | undefined>(undefined);
+
   useEffect(() => {
     const initialize = async () => {
+      const pokemonId = !!searchParams.get('pokemonId') ? Number(searchParams.get('pokemonId')) : undefined;
       if (pokemonId) {
         const response = await fetchPokemon(pokemonId);
-        setPokemon(response);
+        setCurrentPokemon(response);
       }
+      const allResponse = await fetchAllPokemon();
+      setAllPokemon(allResponse);
     };
 
     initialize();
-  }, [pokemonId]);
+  }, [searchParams]);
+
+  const selectNewPokemon = (newId: string) => {
+    setSearchParams({['pokemonId']: newId});
+    setIsSelecting(false);
+  };
 
   return <InfoSectionContainer>
-    {pokemon!! && (
+
       <>
         <div className="vertical">
-          <h3 className={"capitalize"}>{pokemon!.primaryType}{!!pokemon!.secondaryType && `| ${pokemon!.secondaryType}`}</h3>
-          <h1 className={"capitalize"}>{pokemon!.pokemonName}</h1>
+          <h3 className={"capitalize"}>{currentPokemon?.primaryType}{!!currentPokemon?.secondaryType && ` · ${currentPokemon!.secondaryType}`}</h3>
+          {isSelecting ?
+            <select
+              id={"pokemon-selector"}
+              value={currentPokemon?.pokemonId}
+              onChange={(e) => selectNewPokemon(e.target.value)}
+              onBlur={() => setIsSelecting(false)}
+            >
+              {allPokemon.map(pkmn => {
+                return <option key={`select-${pkmn.pokemonId}`} value={pkmn.pokemonId} className={"capitalize"}>{pkmn.pokemonName}</option>;
+              })}
+            </select>
+            :
+            <h1 className="capitalize clickable" onClick={() => setIsSelecting(true)}>{currentPokemon?.pokemonName}</h1>}
         </div>
-        <PokemonImage src={pokemon!.imgUrl} alt={pokemon!.pokemonName} />
+        {currentPokemon!! && (
+        <PokemonImage src={currentPokemon!.imgUrl} alt={currentPokemon!.pokemonName} />
+        )}
       </>
-    )}
     <div className="vertical">
       <h3>&nbsp;</h3>
       <h1>Dynamax Guide</h1>

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequestMapping("/api/v1/manage")
 @RestController
@@ -29,17 +31,17 @@ public class PokemonManager {
     @GetMapping
     public Optional<PokemonDTO> getPokemonFromDb(@RequestParam Integer pokemonId) {
         return pokemonManagerService.getPokemonFromDb(pokemonId)
-                .map(pokemonEntity ->
-                        PokemonDTO.builder()
-                                .pokemonName(pokemonEntity.getName())
-                                .pokemonId(pokemonEntity.getPokemonKey())
-                                .attack(pokemonEntity.getAttack())
-                                .defense(pokemonEntity.getDefense())
-                                .stamina(pokemonEntity.getStamina())
-                                .primaryType(pokemonEntity.getType1())
-                                .secondaryType(pokemonEntity.getType2())
-                                .imgUrl(pokemonEntity.getImgUrl())
-                                .build());
+                .map(pokemonManagerService::mapPokemonToDTO);
+    }
+
+    /**
+     * Fetches for all pokemon currently in the database.
+     * @return the list of pokemon
+     */
+    @GetMapping("/all")
+    public List<PokemonDTO> getAllPokemonFromDb() {
+        return pokemonManagerService.getAllPokemonFromDb().stream()
+                .map(pokemonManagerService::mapPokemonToDTO).collect(Collectors.toList());
     }
 
     /**

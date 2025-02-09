@@ -45,9 +45,9 @@ const DefenderTableBlock = styled.tbody`
 export default function DefenderSection() {
   const [searchParams, _setSearchParams] = useSearchParams();
   const pokemonId = searchParams.get('pokemonId');
-  const [bossPokemonId, _setBossPokemonId] = useState<number | undefined>(!!pokemonId ? Number(pokemonId) : undefined);
   const [defenderPokemon, setDefenderPokemon] = useState<DefenderPokemonMapInterface>({});
   useEffect(() => {
+    const bossPokemonId = !!pokemonId ? Number(pokemonId) : undefined;
     const initialize = async () => {
       if (!!bossPokemonId) {
         const response = await fetchDefenderPokemon(bossPokemonId);
@@ -56,7 +56,7 @@ export default function DefenderSection() {
     };
 
     initialize();
-  }, [bossPokemonId]);
+  }, [searchParams]);
 
   const generateDefenderRows = (defenderMap: DefenderPokemonMapInterface) => {
     const resultRow: ReactNode[] = [];

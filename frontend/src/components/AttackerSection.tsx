@@ -40,10 +40,10 @@ const AttackerSectionContainer = styled.div`
 export default function AttackerSection() {
   const [searchParams, _setSearchParams] = useSearchParams();
   const pokemonId = searchParams.get('pokemonId');
-  const [bossPokemonId, _setBossPokemonId] = useState<number | undefined>(!!pokemonId ? Number(pokemonId) : undefined);
   const [attackerPokemon, setAttackerPokemon] = useState<AttackerPokemonInterface[]>([]);
   useEffect(() => {
     const initialize = async () => {
+      const bossPokemonId = !!pokemonId ? Number(pokemonId) : undefined;
       if (!!bossPokemonId) {
         const response = await fetchAttackerPokemon(bossPokemonId);
         setAttackerPokemon(response);
@@ -51,7 +51,7 @@ export default function AttackerSection() {
     };
 
     initialize();
-  }, [bossPokemonId]);
+  }, [searchParams]);
 
   return <AttackerSectionContainer>
     <h1>

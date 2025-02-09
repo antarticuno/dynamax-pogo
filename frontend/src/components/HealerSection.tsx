@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import HealerPokemonInterface from "../types/HealerPokemonInterface";
 import {fetchHealerPokemon} from "../service/apiClient";
-import {useSearchParams} from "react-router-dom";
 import styled from "styled-components";
 import {FavouriteIcon} from "hugeicons-react";
 
@@ -36,9 +35,6 @@ const HealerSectionContainer = styled.div`
   }
 `;
 export default function HealerSection() {
-  const [searchParams, _setSearchParams] = useSearchParams();
-  const pokemonId = searchParams.get('pokemonId');
-  const [bossPokemonId, _setBossPokemonId] = useState<number | undefined>(!!pokemonId ? Number(pokemonId) : undefined);
   const [healerPokemon, setHealerPokemon] = useState<HealerPokemonInterface[]>([]);
   useEffect(() => {
     const initialize = async () => {
@@ -47,7 +43,7 @@ export default function HealerSection() {
     };
 
     initialize();
-  }, [bossPokemonId]);
+  }, [healerPokemon]);
 
   return <HealerSectionContainer>
     <h1>

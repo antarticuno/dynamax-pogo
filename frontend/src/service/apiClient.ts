@@ -15,6 +15,16 @@ const fetchPokemon = async (pokemonId: number) => {
   return data;
 }
 
+const fetchAllPokemon = async () => {
+  let queryUrl = `${backendUrl}/api/v1/manage/all`;
+  const response = await fetch(queryUrl);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const data: PokemonInterface[] = await response.json();
+  return data;
+};
+
 /**
  * Fetch the list of healer pokemon
  */
@@ -51,6 +61,7 @@ const fetchDefenderPokemon = async (pokemonId: number) => {
 
 export {
   fetchPokemon,
+  fetchAllPokemon,
   fetchHealerPokemon,
   fetchAttackerPokemon,
   fetchDefenderPokemon

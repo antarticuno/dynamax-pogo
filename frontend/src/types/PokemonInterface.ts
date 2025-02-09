@@ -1,5 +1,5 @@
 export default interface PokemonInterface {
-  pokemonId: string,
+  pokemonId: number,
   pokemonName: string,
   primaryType: string,
   secondaryType: string | undefined,
