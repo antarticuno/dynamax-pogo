@@ -1,7 +1,7 @@
 package com.antarticuno.dmax.entity;
 
 import com.antarticuno.dmax.model.AttackerPokemonDTO;
-import com.antarticuno.dmax.model.DefenderPokemonDTO;
+import com.antarticuno.dmax.model.DefenderPokemonResultInfoDTO;
 import lombok.Data;
 
 import javax.persistence.Basic;
@@ -76,7 +76,7 @@ import java.util.Objects;
 @SqlResultSetMapping(
         name = "defender_dto",
         classes = @ConstructorResult(
-                targetClass = DefenderPokemonDTO.class,
+                targetClass = DefenderPokemonResultInfoDTO.class,
                 columns = {
                         @ColumnResult(name = "pokemon_id", type = Integer.class),
                         @ColumnResult(name = "defender_name", type = String.class),

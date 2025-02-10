@@ -1,10 +1,10 @@
-import {ReactNode, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {fetchDefenderPokemon} from "../service/apiClient";
 import {useSearchParams} from "react-router-dom";
-import DefenderPokemonMapInterface from "../types/DefenderPokemonMapInterface";
 import * as d3 from 'd3';
 import styled from "styled-components";
 import {Shield01Icon} from "hugeicons-react";
+import DefenderPokemonInterface from "../types/DefenderPokemonInterface";
 
 const styleThreshold = 700;
 
@@ -45,7 +45,7 @@ const DefenderTableBlock = styled.tbody`
 export default function DefenderSection() {
   const [searchParams, _setSearchParams] = useSearchParams();
   const pokemonId = searchParams.get('pokemonId');
-  const [defenderPokemon, setDefenderPokemon] = useState<DefenderPokemonMapInterface>({});
+  const [defenderPokemon, setDefenderPokemon] = useState<DefenderPokemonInterface[]>([]);
   useEffect(() => {
     const bossPokemonId = !!pokemonId ? Number(pokemonId) : undefined;
     const initialize = async () => {
@@ -58,27 +58,9 @@ export default function DefenderSection() {
     initialize();
   }, [searchParams]);
 
-  const generateDefenderRows = (defenderMap: DefenderPokemonMapInterface) => {
-    const resultRow: ReactNode[] = [];
-    for (const defenderName in defenderMap) {
-      if (defenderMap.hasOwnProperty(defenderName)) {
-        const movesList = defenderMap[defenderName];
-        const colorScale = d3.scaleLinear(
-          [1, 60, 180],
-          ['green', 'yellow', 'red']);
-        resultRow.push(<DefenderTableBlock key={`defender-${defenderName}`}>
-        {movesList.map((move, idx) => {
-          return (<tr key={`defender-${defenderName}-${idx}`}>
-            <td className="capitalize">{move.pokemonName}</td>
-            <td>{move.moveName}</td>
-            <td style={{background: colorScale(move.damage)}}>{move.damage}</td>
-          </tr>)
-        })}
-        </DefenderTableBlock>);
-      }
-    }
-    return resultRow;
-  };
+  const colorScale = d3.scaleLinear(
+    [1, 60, 180],
+    ['green', 'yellow', 'red']);
 
   return <DefenderSectionContainer>
     <h1>
@@ -93,7 +75,19 @@ export default function DefenderSection() {
         <th>Damage Received</th>
       </tr>
       </thead>
-      {generateDefenderRows(defenderPokemon)}
+      <>
+        {defenderPokemon.map(dpkmn => {
+          return <DefenderTableBlock key={`defender-${dpkmn.pokemonName}`}>
+            {dpkmn.damageCalculations.map((move, idx) => {
+              return (<tr key={`defender-${dpkmn.pokemonName}-${idx}`}>
+                <td className="capitalize">{dpkmn.pokemonName}</td>
+                <td>{move.moveName}</td>
+                <td style={{background: colorScale(move.damage)}}>{move.damage}</td>
+              </tr>)
+            })}
+          </DefenderTableBlock>
+        })}
+      </>
     </table>
   </DefenderSectionContainer>;
 }

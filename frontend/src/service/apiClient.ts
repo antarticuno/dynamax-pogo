@@ -1,7 +1,7 @@
 import HealerPokemonInterface from "../types/HealerPokemonInterface";
 import AttackerPokemonInterface from "../types/AttackerPokemonInterface";
-import DefenderPokemonMapInterface from "../types/DefenderPokemonMapInterface";
 import PokemonInterface from "../types/PokemonInterface";
+import DefenderPokemonInterface from "../types/DefenderPokemonInterface";
 
 const backendUrl = 'http://localhost:8080';
 
@@ -55,7 +55,7 @@ const fetchDefenderPokemon = async (pokemonId: number) => {
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-  const data: DefenderPokemonMapInterface = await response.json();
+  const data: DefenderPokemonInterface[] = await response.json();
   return data;
 };
 

@@ -2,6 +2,7 @@ package com.antarticuno.dmax.controller;
 
 import com.antarticuno.dmax.model.AttackerPokemonDTO;
 import com.antarticuno.dmax.model.DefenderPokemonDTO;
+import com.antarticuno.dmax.model.DefenderPokemonResultInfoDTO;
 import com.antarticuno.dmax.model.HealerPokemonDTO;
 import com.antarticuno.dmax.repository.PokemonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -44,11 +46,33 @@ public class MaxMoveCalculator {
      * @return the list of pokemon and how much damage they take from each move
      */
     @GetMapping("/guard")
-    public Map<String, List<DefenderPokemonDTO>> bestDefendersForBoss(@RequestParam Integer bossPokemonId,
+    public List<DefenderPokemonDTO> bestDefendersForBoss(@RequestParam Integer bossPokemonId,
                                                         @RequestParam(defaultValue = "-1") Integer limit) {
-        return pokemonRepository.findBestDefenders(bossPokemonId, PageRequest.of(0, limit < 0 ? Integer.MAX_VALUE : limit))
+        final Map<String, List<DefenderPokemonResultInfoDTO>> defenderMap = pokemonRepository.findBestDefenders(bossPokemonId, PageRequest.of(0, limit < 0 ? Integer.MAX_VALUE : limit))
                 .stream()
-                .collect(Collectors.groupingBy(DefenderPokemonDTO::getPokemonName));
+                .collect(Collectors.groupingBy(DefenderPokemonResultInfoDTO::getPokemonName));
+        return defenderMap.keySet()
+                .stream()
+                .map(defenderName -> {
+                    final List<DefenderPokemonResultInfoDTO> damageCalcs = defenderMap.get(defenderName);
+                    return DefenderPokemonDTO.builder()
+                            .pokemonName(defenderName)
+                            .pokemonId(damageCalcs.stream().map(DefenderPokemonResultInfoDTO::getPokemonId).findFirst().orElseThrow())
+                            .pokemonStamina(damageCalcs.stream().map(DefenderPokemonResultInfoDTO::getPokemonStamina).findFirst().orElseThrow())
+                            .damageCalculations(damageCalcs.stream()
+                                    .map(damageCalc -> DefenderPokemonDTO.DamageCalc.builder()
+                                            .moveName(damageCalc.getMoveName())
+                                            .damage(damageCalc.getDamage())
+                                            .build())
+                                    .collect(Collectors.toList()))
+                            .averageDamageReceived((double) damageCalcs.stream()
+                                    .map(DefenderPokemonResultInfoDTO::getDamage)
+                                    .mapToInt(Integer::intValue)
+                                    .sum() / damageCalcs.size())
+                            .build();
+                })
+                .sorted(Comparator.comparing(DefenderPokemonDTO::getAverageDamageReceived))
+                .collect(Collectors.toList());
     }
 
     /**

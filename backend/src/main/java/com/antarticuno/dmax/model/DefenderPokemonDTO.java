@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -15,7 +17,16 @@ public class DefenderPokemonDTO {
 
     private int pokemonStamina;
 
-    private String moveName;
+    private Double averageDamageReceived;
 
-    private int damage;
+    private List<DamageCalc> damageCalculations;
+
+    @Data
+    @Builder
+    public static class DamageCalc {
+
+        private String moveName;
+
+        private int damage;
+    }
 }
