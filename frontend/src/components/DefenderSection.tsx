@@ -8,6 +8,7 @@ import DefenderPokemonInterface from "../types/DefenderPokemonInterface";
 import Image from "rc-image";
 // @ts-ignore
 import NotFound from "../assets/not_found.png";
+import DefenderExplanation from "./DefenderExplanation";
 
 const styleThreshold = 700;
 
@@ -74,6 +75,15 @@ export default function DefenderSection() {
     [1, 60, 180],
     ['green', 'yellow', 'red']);
 
+  if (!pokemonId) {
+    return <DefenderSectionContainer>
+      <h1>
+        <Shield01Icon />
+        Guard
+      </h1>
+      <DefenderExplanation />
+    </DefenderSectionContainer>;
+  }
   return <DefenderSectionContainer>
     <h1>
       <Shield01Icon />

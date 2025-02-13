@@ -6,6 +6,8 @@ import {FavouriteIcon} from "hugeicons-react";
 import Image from "rc-image";
 // @ts-ignore
 import NotFound from "../assets/not_found.png";
+import {useSearchParams} from "react-router-dom";
+import HealerExplanation from "./HealerExplanation";
 
 const styleThreshold = 700;
 
@@ -46,6 +48,8 @@ const HealerSectionContainer = styled.div`
   }
 `;
 export default function HealerSection() {
+  const [searchParams, _setSearchParams] = useSearchParams();
+  const pokemonId = searchParams.get('pokemonId');
   const [healerPokemon, setHealerPokemon] = useState<HealerPokemonInterface[]>([]);
   useEffect(() => {
     const initialize = async () => {
@@ -55,6 +59,17 @@ export default function HealerSection() {
 
     initialize();
   }, [healerPokemon]);
+
+  if (!pokemonId) {
+    return <HealerSectionContainer>
+      <h1>
+        <FavouriteIcon />
+        Spirit
+      </h1>
+      <HealerExplanation />
+    </HealerSectionContainer>
+  }
+
 
   return <HealerSectionContainer>
     <h1>

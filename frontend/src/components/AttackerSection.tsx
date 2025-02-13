@@ -8,6 +8,7 @@ import Image from 'rc-image';
 import NotFound from "../assets/not_found.png";
 
 import styled from "styled-components";
+import AttackerExplanation from "./AttackerExplanation";
 
 const styleThreshold = 700;
 
@@ -64,6 +65,15 @@ export default function AttackerSection() {
     initialize();
   }, [searchParams]);
 
+  if (!pokemonId) {
+    return <AttackerSectionContainer>
+      <h1>
+        <EnergyIcon height={30} width={30} />
+        Strike
+      </h1>
+      <AttackerExplanation />
+    </AttackerSectionContainer>
+  }
   return <AttackerSectionContainer>
     <h1>
       <EnergyIcon height={30} width={30} />

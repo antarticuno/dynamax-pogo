@@ -109,6 +109,7 @@ export default function InfoSection() {
               onChange={(e) => selectNewPokemon(e.target.value)}
               onBlur={() => setIsSelecting(false)}
             >
+              <option key={-1} value={''}>--select--</option>
               {allPokemon.map(pkmn => {
                 return <option key={`select-${pkmn.pokemonId}`} value={pkmn.pokemonId} className={"capitalize"}>{pkmn.pokemonName}</option>;
               })}
