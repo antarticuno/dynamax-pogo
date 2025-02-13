@@ -3,6 +3,9 @@ import {useEffect, useState} from "react";
 import {fetchAllPokemon, fetchPokemon} from "../service/apiClient";
 import PokemonInterface from "../types/PokemonInterface";
 import styled from "styled-components";
+// @ts-ignore
+import NotFound from "../assets/not_found.png";
+import Image from "rc-image";
 
 const styleThreshold = 700;
 
@@ -32,6 +35,10 @@ const InfoSectionContainer = styled.div`
     transform: rotate(180deg);
   }
   
+  .rc-image {
+    text-align: center;
+  }
+  
   @media(max-width: ${styleThreshold}px) {
     flex-direction: row;
     position: sticky;
@@ -54,7 +61,7 @@ const InfoSectionContainer = styled.div`
   }
 `;
 
-const PokemonImage = styled.img`
+const PokemonImage = styled(Image)`
   vertical-align: middle;
   margin: 20px 0;
   width: 50%;
@@ -110,7 +117,9 @@ export default function InfoSection() {
             <h1 className="capitalize clickable" onClick={() => setIsSelecting(true)}>{currentPokemon?.pokemonName}</h1>}
         </div>
         {currentPokemon!! && (
-        <PokemonImage src={currentPokemon!.imgUrl} alt={currentPokemon!.pokemonName} />
+        <PokemonImage src={currentPokemon!.imgUrl}
+                      alt={currentPokemon!.pokemonName}
+                      fallback={NotFound} />
         )}
       </>
     <div className="vertical">
