@@ -140,18 +140,7 @@ public class PokemonManagerService {
                         .map(pkmnRes -> pkmnRes.getString("English"))
                         .map(String::toLowerCase)
                         .orElse(null));
-        if (!pokemonResponse.getJSONArray("assetForms").toList().isEmpty()) {
-            final JSONArray imageList = pokemonResponse.getJSONArray("assetForms");
-            for (int i = 0; i < imageList.length(); i++) {
-                final JSONObject assetImage = imageList.getJSONObject(i);
-                if (StringUtils.isNotBlank(assetImage.optString("form")) ||
-                        StringUtils.isNotBlank(assetImage.optString("costume"))) {
-                    continue;
-                }
-                pokemon.setImgUrl(assetImage.getString("image"));
-                break;
-            }
-        }
+        pokemon.setImgUrl(String.format("https://assets.dittobase.com/go/pokemon/%s-%s.png", pokedexId, pokemon.getName()));
         pokemonRepository.save(pokemon);
 
         // Move processing

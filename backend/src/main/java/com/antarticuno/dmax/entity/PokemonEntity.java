@@ -26,6 +26,7 @@ import java.util.Objects;
                 ") as damage, \n" +
                 "attacker.pokemon_key as pokemon_id, \n" +
                 "(case when max_move.name like 'G-Max%' then concat('gigantamax ', attacker.name) else attacker.name end) as attacker_name, \n" +
+                "(case when max_move.name like 'G-Max%' then attacker.gmax_img_url else attacker.img_url end) as img_url, \n" +
                 "max_move.name as max_move_name\n" +
                 "from pokemon attacker \n" +
                 "join max_move using (pokemon_key)\n" +
@@ -44,6 +45,7 @@ import java.util.Objects;
                 columns = {
                         @ColumnResult(name = "pokemon_id", type = Integer.class),
                         @ColumnResult(name = "attacker_name", type = String.class),
+                        @ColumnResult(name = "img_url", type = String.class),
                         @ColumnResult(name = "max_move_name", type = String.class),
                         @ColumnResult(name = "damage", type = Integer.class)
                 }

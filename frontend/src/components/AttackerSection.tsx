@@ -3,6 +3,9 @@ import {fetchAttackerPokemon} from "../service/apiClient";
 import {useSearchParams} from "react-router-dom";
 import AttackerPokemonInterface from "../types/AttackerPokemonInterface";
 import { EnergyIcon } from "hugeicons-react";
+import Image from 'rc-image';
+// @ts-ignore
+import NotFound from "../assets/not_found.png";
 
 import styled from "styled-components";
 
@@ -34,6 +37,14 @@ const AttackerSectionContainer = styled.div`
   table {
     width: 100%;
     height: 100%;
+    
+    td.preview-image {
+      text-align: center;
+    }
+    
+    img {
+      height: 3em;
+    }
   }
 `;
 
@@ -61,7 +72,7 @@ export default function AttackerSection() {
     <table>
       <thead>
         <tr>
-          <th>Pokemon</th>
+          <th colSpan={2}>Pokemon</th>
           <th>Move Name</th>
           <th>Damage Dealt</th>
         </tr>
@@ -69,6 +80,10 @@ export default function AttackerSection() {
       <tbody>
         {attackerPokemon.map(((attacker, idx) => {
           return <tr key={`attacker-${idx}`}>
+            <td className="preview-image">
+              <Image src={attacker.pokemonImgUrl}
+                       fallback={NotFound} />
+            </td>
             <td className="capitalize">{attacker.pokemonName}</td>
             <td>{attacker.maxMoveName}</td>
             <td>{attacker.damage}</td>
