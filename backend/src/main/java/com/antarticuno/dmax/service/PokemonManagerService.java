@@ -9,7 +9,9 @@ import com.antarticuno.dmax.repository.MoveRepository;
 import com.antarticuno.dmax.repository.PokemonRepository;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.collections4.IteratorUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -139,7 +141,16 @@ public class PokemonManagerService {
                         .map(String::toLowerCase)
                         .orElse(null));
         if (!pokemonResponse.getJSONArray("assetForms").toList().isEmpty()) {
-            pokemon.setImgUrl(pokemonResponse.getJSONArray("assetForms").getJSONObject(0).getString("image"));
+            final JSONArray imageList = pokemonResponse.getJSONArray("assetForms");
+            for (int i = 0; i < imageList.length(); i++) {
+                final JSONObject assetImage = imageList.getJSONObject(i);
+                if (StringUtils.isNotBlank(assetImage.optString("form")) ||
+                        StringUtils.isNotBlank(assetImage.optString("costume"))) {
+                    continue;
+                }
+                pokemon.setImgUrl(assetImage.getString("image"));
+                break;
+            }
         }
         pokemonRepository.save(pokemon);
 
@@ -219,6 +230,7 @@ public class PokemonManagerService {
     public void upgradePokemonToDynamax(Integer pokemonId) {
         final PokemonEntity pokemon = getPokemonFromDb(pokemonId).orElseThrow(() -> new RuntimeException("Pokemon not found."));
         pokemon.setMaxAvailable(true);
+        pokemon.setGmaxImgUrl(String.format("https://assets.dittobase.com/go/pokemon/%s-%s-gigantamax.png", pokemon.getPokemonKey(), pokemon.getName()));
         pokemonRepository.save(pokemon);
 
         final List<MaxMoveEntity> maxMoves = moveRepository.findAllByPokemonKey(pokemonId).stream()

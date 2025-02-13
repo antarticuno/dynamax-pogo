@@ -49,8 +49,8 @@ public class PokemonManager {
      * @param pokemonId the pokemon id in question
      */
     @GetMapping("/fetch")
-    public Optional<JSONObject> getPokemonFromApi(@RequestParam Integer pokemonId) {
-        return pokemonManagerService.getPokemonFromApi(pokemonId);
+    public JSONObject getPokemonFromApi(@RequestParam Integer pokemonId) {
+        return pokemonManagerService.getPokemonFromApi(pokemonId).orElse(null);
     }
 
     /**
