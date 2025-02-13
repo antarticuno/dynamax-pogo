@@ -23,6 +23,13 @@ const DefenderSectionContainer = styled.div`
     background-color: #242424;
     position: sticky;
     top: 0px;
+    
+    & > span {
+      position: absolute;
+      right: 10px;
+      font-size: 0.8em;
+      cursor: pointer;
+    }
 
     svg {
       vertical-align: middle;
@@ -59,6 +66,8 @@ export default function DefenderSection() {
   const [searchParams, _setSearchParams] = useSearchParams();
   const pokemonId = searchParams.get('pokemonId');
   const [defenderPokemon, setDefenderPokemon] = useState<DefenderPokemonInterface[]>([]);
+  const [isScaleShields, setIsScaleShields] = useState<boolean>(true);
+
   useEffect(() => {
     const bossPokemonId = !!pokemonId ? Number(pokemonId) : undefined;
     const initialize = async () => {
@@ -70,10 +79,6 @@ export default function DefenderSection() {
 
     initialize();
   }, [searchParams]);
-
-  const colorScale = d3.scaleLinear(
-    [1, 60, 180],
-    ['green', 'yellow', 'red']);
 
   if (!pokemonId) {
     return <DefenderSectionContainer>
@@ -88,6 +93,7 @@ export default function DefenderSection() {
     <h1>
       <Shield01Icon />
       Guard
+      <span onClick={() => setIsScaleShields(!isScaleShields)}>•••</span>
     </h1>
     <table>
       <thead>
@@ -101,6 +107,9 @@ export default function DefenderSection() {
         {defenderPokemon.map(dpkmn => {
           return <DefenderTableBlock key={`defender-${dpkmn.pokemonName}`}>
             {dpkmn.damageCalculations.map((move, idx) => {
+              const colorScale = d3.scaleLinear(
+                isScaleShields ? [1, 60, 180] : [1, dpkmn.pokemonStamina / 2, dpkmn.pokemonStamina],
+                ['green', 'yellow', 'red']);
               return (<tr key={`defender-${dpkmn.pokemonName}-${idx}`}>
                 {idx === 0 &&
                   <>

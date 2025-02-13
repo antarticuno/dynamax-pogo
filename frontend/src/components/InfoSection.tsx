@@ -68,7 +68,6 @@ const PokemonImage = styled(Image)`
 
   @media(max-width: ${styleThreshold}px) {
     margin: 0 5px;
-    width: 20%;
   }
 `;
 
