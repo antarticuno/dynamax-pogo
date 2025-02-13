@@ -43,7 +43,7 @@ const AttackerSectionContainer = styled.div`
     }
     
     img {
-      height: 3em;
+      height: 4em;
     }
   }
 `;

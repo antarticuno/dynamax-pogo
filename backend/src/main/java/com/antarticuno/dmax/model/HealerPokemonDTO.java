@@ -13,6 +13,8 @@ public class HealerPokemonDTO {
 
     private String pokemonName;
 
+    private String pokemonImgUrl;
+
     @Builder.Default
     private double maxHealingAmount = 0.0;
 }

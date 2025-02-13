@@ -1,6 +1,7 @@
 export default interface DefenderPokemonInterface {
   pokemonId: number,
   pokemonName: string,
+  pokemonImgUrl: string,
   pokemonStamina: number,
   averageDamageReceived?: number,
   damageCalculations: DamageCalculationInterface[]

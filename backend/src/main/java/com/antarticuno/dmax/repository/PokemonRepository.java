@@ -23,7 +23,7 @@ public interface PokemonRepository extends CrudRepository<PokemonEntity, Integer
     @Query(nativeQuery = true, name="find_defender_dto")
     List<DefenderPokemonResultInfoDTO> findBestDefenders(Integer bossPokemonId, Pageable limit);
 
-    @Query("select new com.antarticuno.dmax.model.HealerPokemonDTO(pokemon.pokemonKey, pokemon.name, 0.16 * pokemon.stamina) " +
+    @Query("select new com.antarticuno.dmax.model.HealerPokemonDTO(pokemon.pokemonKey, pokemon.name, pokemon.imgUrl, 0.16 * pokemon.stamina) " +
             "from PokemonEntity pokemon " +
             "where pokemon.maxAvailable = true " +
             "order by pokemon.stamina desc")

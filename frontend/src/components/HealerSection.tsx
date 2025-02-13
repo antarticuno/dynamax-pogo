@@ -3,6 +3,9 @@ import HealerPokemonInterface from "../types/HealerPokemonInterface";
 import {fetchHealerPokemon} from "../service/apiClient";
 import styled from "styled-components";
 import {FavouriteIcon} from "hugeicons-react";
+import Image from "rc-image";
+// @ts-ignore
+import NotFound from "../assets/not_found.png";
 
 const styleThreshold = 700;
 
@@ -32,6 +35,14 @@ const HealerSectionContainer = styled.div`
   table {
     width: 100%;
     height: 100%;
+
+    td.preview-image {
+      text-align: center;
+    }
+
+    img {
+      height: 4em;
+    }
   }
 `;
 export default function HealerSection() {
@@ -53,13 +64,17 @@ export default function HealerSection() {
     <table>
       <thead>
         <tr>
-          <th>Pokemon</th>
+          <th colSpan={2}>Pokemon</th>
           <th>Damage Healed</th>
         </tr>
       </thead>
       <tbody>
         {healerPokemon.map(((healer, idx) => {
           return <tr key={`healer-${idx}`}>
+            <td className="preview-image">
+              <Image src={healer.pokemonImgUrl}
+                     fallback={NotFound} />
+            </td>
             <td className="capitalize">{healer.pokemonName}</td>
             <td>{healer.maxHealingAmount}</td>
           </tr>;

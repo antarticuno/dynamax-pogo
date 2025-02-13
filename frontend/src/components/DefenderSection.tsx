@@ -5,6 +5,9 @@ import * as d3 from 'd3';
 import styled from "styled-components";
 import {Shield01Icon} from "hugeicons-react";
 import DefenderPokemonInterface from "../types/DefenderPokemonInterface";
+import Image from "rc-image";
+// @ts-ignore
+import NotFound from "../assets/not_found.png";
 
 const styleThreshold = 700;
 
@@ -33,12 +36,21 @@ const DefenderSectionContainer = styled.div`
   table {
     border-spacing: 0;
     width: 100%;
+
+    td.preview-image {
+      text-align: center;
+      border-bottom: 3px solid white;
+    }
+
+    img {
+      height: 4em;
+    }
   }
 `;
 
 const DefenderTableBlock = styled.tbody`
   tr:last-of-type td {
-    border-bottom: 5px solid white;
+    border-bottom: 3px solid white;
   }
 `;
 
@@ -70,7 +82,7 @@ export default function DefenderSection() {
     <table>
       <thead>
       <tr>
-        <th>Pokemon</th>
+        <th colSpan={2}>Pokemon</th>
         <th>Move Name</th>
         <th>Damage Received</th>
       </tr>
@@ -80,7 +92,15 @@ export default function DefenderSection() {
           return <DefenderTableBlock key={`defender-${dpkmn.pokemonName}`}>
             {dpkmn.damageCalculations.map((move, idx) => {
               return (<tr key={`defender-${dpkmn.pokemonName}-${idx}`}>
-                <td className="capitalize">{dpkmn.pokemonName}</td>
+                {idx === 0 &&
+                  <>
+                    <td className="preview-image" rowSpan={defenderPokemon.length}>
+                      <Image src={dpkmn.pokemonImgUrl}
+                             fallback={NotFound} />
+                    </td>
+                    <td className="capitalize preview-image" rowSpan={defenderPokemon.length}>{dpkmn.pokemonName}</td>
+                  </>
+                }
                 <td>{move.moveName}</td>
                 <td style={{background: colorScale(move.damage)}}>{move.damage}</td>
               </tr>)

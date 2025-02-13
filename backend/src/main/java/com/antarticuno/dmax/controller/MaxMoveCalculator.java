@@ -57,6 +57,7 @@ public class MaxMoveCalculator {
                     final List<DefenderPokemonResultInfoDTO> damageCalcs = defenderMap.get(defenderName);
                     return DefenderPokemonDTO.builder()
                             .pokemonName(defenderName)
+                            .pokemonImgUrl(damageCalcs.stream().map(DefenderPokemonResultInfoDTO::getPokemonImgUrl).findFirst().orElseThrow())
                             .pokemonId(damageCalcs.stream().map(DefenderPokemonResultInfoDTO::getPokemonId).findFirst().orElseThrow())
                             .pokemonStamina(damageCalcs.stream().map(DefenderPokemonResultInfoDTO::getPokemonStamina).findFirst().orElseThrow())
                             .damageCalculations(damageCalcs.stream()

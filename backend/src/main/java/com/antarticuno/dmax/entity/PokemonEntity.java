@@ -62,6 +62,7 @@ import java.util.Objects;
                 ") as damage,\n" +
                 "move.name as move_name,\n" +
                 "defender.name as defender_name,\n" +
+                "defender.img_url as defender_img_url,\n" +
                 "defender.stamina as defender_stamina,\n" +
                 "defender.pokemon_key as pokemon_id\n" +
                 "from pokemon boss\n" +
@@ -82,6 +83,7 @@ import java.util.Objects;
                 columns = {
                         @ColumnResult(name = "pokemon_id", type = Integer.class),
                         @ColumnResult(name = "defender_name", type = String.class),
+                        @ColumnResult(name = "defender_img_url", type = String.class),
                         @ColumnResult(name = "defender_stamina", type = Integer.class),
                         @ColumnResult(name = "move_name", type = String.class),
                         @ColumnResult(name = "damage", type = Integer.class)
