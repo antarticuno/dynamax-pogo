@@ -7,6 +7,16 @@ plugins {
     id("java")
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11)) // or any desired version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     compileOnly("org.projectlombok:lombok:1.18.36")
     implementation("org.json:json:20250107")
