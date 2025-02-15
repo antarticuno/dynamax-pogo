@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {fetchDefenderPokemon} from "../service/apiClient";
 import {useSearchParams} from "react-router-dom";
 import * as d3 from 'd3';
@@ -10,6 +10,7 @@ import Image from "rc-image";
 import NotFound from "../assets/not_found.png";
 import DefenderExplanation from "./DefenderExplanation";
 import { Tooltip } from 'react-tooltip';
+import CustomModalContext from "./CustomModalContext";
 
 const styleThreshold = 900;
 
@@ -89,6 +90,7 @@ export default function DefenderSection() {
   const pokemonId = searchParams.get('pokemonId');
   const [defenderPokemon, setDefenderPokemon] = useState<DefenderPokemonInterface[]>([]);
   const [isScaleShields, setIsScaleShields] = useState<boolean>(true);
+  const {setContent} = useContext(CustomModalContext);
 
   useEffect(() => {
     const bossPokemonId = !!pokemonId ? Number(pokemonId) : undefined;
@@ -155,7 +157,8 @@ export default function DefenderSection() {
                       style={{padding: '0'}}
                       clickable
                       openOnClick>
-      <div onClick={() => setIsScaleShields(!isScaleShields)}>Scale Based On: {isScaleShields ? 'Shield HP (180HP)' : 'Stamina HP'}</div>
+      <div onClick={() => setContent(<DefenderExplanation />)}>About Max Guard</div>
+      <div onClick={() => setIsScaleShields(!isScaleShields)}>Color Scale: {isScaleShields ? 'Shield HP (180HP)' : 'Stamina HP'}</div>
       <div>Help <HelpCircleIcon /></div>
     </ConfigureTooltip>
   </DefenderSectionContainer>;

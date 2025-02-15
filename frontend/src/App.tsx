@@ -5,6 +5,7 @@ import styled from "styled-components";
 import InfoSection from "./components/InfoSection";
 // @ts-ignore
 import PokeballBg from "./assets/pokeball.png";
+import {CustomModalContextProvider} from "./components/CustomModalContext";
 
 const styleThreshold = 900;
 
@@ -38,13 +39,15 @@ const Spacer = styled.div`
 export default function App() {
   return (
     <AppContainer className="App">
-      <InfoSection />
-      <Spacer />
-      <AttackerSection />
-      <Spacer />
-      <DefenderSection />
-      <Spacer />
-      <HealerSection />
+      <CustomModalContextProvider>
+        <InfoSection />
+        <Spacer />
+        <AttackerSection />
+        <Spacer />
+        <DefenderSection />
+        <Spacer />
+        <HealerSection />
+      </CustomModalContextProvider>
     </AppContainer>
   );
 }

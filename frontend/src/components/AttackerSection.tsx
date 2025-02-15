@@ -1,24 +1,34 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {fetchAttackerPokemon} from "../service/apiClient";
 import {useSearchParams} from "react-router-dom";
 import AttackerPokemonInterface from "../types/AttackerPokemonInterface";
-import { EnergyIcon } from "hugeicons-react";
+import {EnergyIcon, HelpCircleIcon} from "hugeicons-react";
 import Image from 'rc-image';
 // @ts-ignore
 import NotFound from "../assets/not_found.png";
 
 import styled from "styled-components";
 import AttackerExplanation from "./AttackerExplanation";
+import CustomModalContext from "./CustomModalContext";
+import {Tooltip} from "react-tooltip";
 
 const styleThreshold = 900;
 
 const AttackerSectionContainer = styled.div`
   width: 28vw;
   background-color: rgba(36, 36, 36, 0.8);
+  position: relative;
 
   h1 {
     margin: 0;
     padding: 5px 10px;
+
+    & > span {
+      position: absolute;
+      right: 10px;
+      font-size: 0.8em;
+      cursor: pointer;
+    }
     
     svg {
       vertical-align: middle;
@@ -59,10 +69,27 @@ const AttackerSectionContainer = styled.div`
   }
 `;
 
+const ConfigureTooltip = styled(Tooltip)`
+  div:not(.react-tooltip-arrow) {
+    cursor: pointer;
+    padding: 8px 15px;
+    
+    &:hover {
+      background-color: rgba(36, 36, 36, 0.2);
+    }
+  }
+  
+  svg {
+    vertical-align: middle;
+  }
+`;
+
 export default function AttackerSection() {
   const [searchParams, _setSearchParams] = useSearchParams();
   const pokemonId = searchParams.get('pokemonId');
   const [attackerPokemon, setAttackerPokemon] = useState<AttackerPokemonInterface[]>([]);
+  const {setContent} = useContext(CustomModalContext);
+
   useEffect(() => {
     const initialize = async () => {
       const bossPokemonId = !!pokemonId ? Number(pokemonId) : undefined;
@@ -88,6 +115,7 @@ export default function AttackerSection() {
     <h1>
       <EnergyIcon height={30} width={30} />
       Strike
+      <span data-tooltip-id="attacker-tooltip">•••</span>
     </h1>
     <table>
       <thead>
@@ -111,5 +139,13 @@ export default function AttackerSection() {
         }))}
       </tbody>
     </table>
+    <ConfigureTooltip id="attacker-tooltip"
+                      variant={'light'}
+                      style={{padding: '0'}}
+                      clickable
+                      openOnClick>
+      <div onClick={() => setContent(<AttackerExplanation />)}>About Max Attacks</div>
+      <div>Help <HelpCircleIcon /></div>
+    </ConfigureTooltip>
   </AttackerSectionContainer>;
 }
