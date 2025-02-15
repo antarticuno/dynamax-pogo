@@ -25,7 +25,8 @@ const DefenderSectionContainer = styled.div`
     padding: 5px 10px;
     position: sticky;
     top: 0px;
-    
+    backdrop-filter: blur(20px);
+
     & > span {
       position: absolute;
       right: 10px;
@@ -154,7 +155,7 @@ export default function DefenderSection() {
     </table>
     <ConfigureTooltip id="defender-tooltip"
                       variant={'light'}
-                      style={{padding: '0'}}
+                      style={{padding: '0', zIndex: '4'}}
                       clickable
                       openOnClick>
       <div onClick={() => setContent(<DefenderExplanation />)}>About Max Guard</div>

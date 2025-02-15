@@ -45,13 +45,13 @@ const InfoSectionContainer = styled.div`
     height: 8vw;
     background: url(${PokeballBg});
     background-size: cover;
-    transform: rotate(-30deg);
+    transform: rotate(40deg);
     margin: 20px 0;
     
     img {
       width: auto;
       height: 100%;
-      transform: rotate(30deg);
+      transform: rotate(-40deg);
     }
   }
   

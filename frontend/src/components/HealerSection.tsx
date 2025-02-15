@@ -21,6 +21,7 @@ const HealerSectionContainer = styled.div`
   h1 {
     margin: 0;
     padding: 5px 10px;
+    backdrop-filter: blur(10px);
     
     & > span {
       position: absolute;

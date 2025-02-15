@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {ReactNode, useContext} from "react";
 import CustomModalContext from "./CustomModalContext";
+import {ArrowTurnBackwardIcon} from "hugeicons-react";
 
 const styleThreshold = 900;
 
@@ -19,6 +20,16 @@ const StyledModal = styled.div`
     padding: 10px 20px;
     background: #242424;
     border-radius: 10px;
+    position: relative;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    height: 2em;
+    width: 2em;
   }
 
   @media(max-width: ${styleThreshold}px) {
@@ -44,8 +55,13 @@ export default function CustomModal(props: CustomModalProps) {
     return <></>;
   }
   return <StyledModal onClick={() =>{setContent()}}>
-    <section onClick={() => {}}>
-      {props.content}
+    <section onClick={(evt) => {
+      evt.stopPropagation();
+    }}>
+      <>
+        <ArrowTurnBackwardIcon className="close-button" onClick={() => setContent()} />
+        {props.content}
+      </>
     </section>
   </StyledModal>;
 }
