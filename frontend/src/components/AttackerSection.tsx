@@ -10,15 +10,15 @@ import NotFound from "../assets/not_found.png";
 import styled from "styled-components";
 import AttackerExplanation from "./AttackerExplanation";
 
-const styleThreshold = 700;
+const styleThreshold = 900;
 
 const AttackerSectionContainer = styled.div`
-  width: 30%;
-  
+  width: 28vw;
+  background-color: rgba(36, 36, 36, 0.8);
+
   h1 {
     margin: 0;
     padding: 5px 10px;
-    background-color: #242424;
     
     svg {
       vertical-align: middle;
@@ -37,7 +37,11 @@ const AttackerSectionContainer = styled.div`
   
   table {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 58px);
+    
+    td {
+      font-size: 0.9em;
+    }
     
     td.preview-image {
       text-align: center;
@@ -88,9 +92,9 @@ export default function AttackerSection() {
     <table>
       <thead>
         <tr>
-          <th colSpan={2}>Pokemon</th>
-          <th>Move Name</th>
-          <th>Damage Dealt</th>
+          <th className="left-align" colSpan={2}>Pokemon</th>
+          <th className="left-align">Move Name</th>
+          <th className="left-align">Damage Dealt</th>
         </tr>
       </thead>
       <tbody>

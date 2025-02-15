@@ -2,19 +2,22 @@ import {useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {fetchAllPokemon, fetchPokemon} from "../service/apiClient";
 import PokemonInterface from "../types/PokemonInterface";
+// @ts-ignore
+import PokeballBg from "../assets/pokeball.png";
 import styled from "styled-components";
 // @ts-ignore
 import NotFound from "../assets/not_found.png";
 import Image from "rc-image";
 
-const styleThreshold = 700;
+const styleThreshold = 900;
 
 const InfoSectionContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #242424;
+  background-color: rgba(36, 36, 36, 0.8);
+  max-width: 12vw;
 
   h1 {
     margin: 0;
@@ -37,6 +40,19 @@ const InfoSectionContainer = styled.div`
   
   .rc-image {
     text-align: center;
+    border-radius: 50%;
+    width: 8vw;
+    height: 8vw;
+    background: url(${PokeballBg});
+    background-size: cover;
+    transform: rotate(-30deg);
+    margin: 20px 0;
+    
+    img {
+      width: auto;
+      height: 100%;
+      transform: rotate(30deg);
+    }
   }
   
   @media(max-width: ${styleThreshold}px) {
@@ -45,6 +61,9 @@ const InfoSectionContainer = styled.div`
     z-index: 5;
     top: 0;
     padding: 20px 0 30px 0;
+    max-width: 100vw;
+    background-color: #242424;
+    border-bottom: 10px double #fff;
     
     h1 {
       font-size: 1.3em;
@@ -58,16 +77,12 @@ const InfoSectionContainer = styled.div`
       writing-mode: lr;
       transform: none;
     }
-  }
-`;
-
-const PokemonImage = styled(Image)`
-  vertical-align: middle;
-  margin: 20px 0;
-  width: 50%;
-
-  @media(max-width: ${styleThreshold}px) {
-    margin: 0 5px;
+    
+    .rc-image {
+      margin: 0 20px;
+      width: 15vw;
+      height: 15vw;
+    }
   }
 `;
 
@@ -117,7 +132,7 @@ export default function InfoSection() {
             <h1 className="capitalize clickable" onClick={() => setIsSelecting(true)}>{currentPokemon?.pokemonName}</h1>}
         </div>
         {currentPokemon!! && (
-        <PokemonImage src={currentPokemon!.imgUrl}
+        <Image src={currentPokemon!.imgUrl}
                       alt={currentPokemon!.pokemonName}
                       fallback={NotFound} />
         )}

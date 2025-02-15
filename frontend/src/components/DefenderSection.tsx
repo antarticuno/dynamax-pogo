@@ -3,24 +3,25 @@ import {fetchDefenderPokemon} from "../service/apiClient";
 import {useSearchParams} from "react-router-dom";
 import * as d3 from 'd3';
 import styled from "styled-components";
-import {Shield01Icon} from "hugeicons-react";
+import {HelpCircleIcon, Shield01Icon} from "hugeicons-react";
 import DefenderPokemonInterface from "../types/DefenderPokemonInterface";
 import Image from "rc-image";
 // @ts-ignore
 import NotFound from "../assets/not_found.png";
 import DefenderExplanation from "./DefenderExplanation";
+import { Tooltip } from 'react-tooltip';
 
-const styleThreshold = 700;
+const styleThreshold = 900;
 
 const DefenderSectionContainer = styled.div`
-  width: 30%;
+  width: 29vw;
   max-height: 100vh;
   overflow-y: scroll;
+  background-color: rgba(36, 36, 36, 0.8);
 
   h1 {
     margin: 0;
     padding: 5px 10px;
-    background-color: #242424;
     position: sticky;
     top: 0px;
     
@@ -68,6 +69,21 @@ const DefenderTableBlock = styled.tbody`
   }
 `;
 
+const ConfigureTooltip = styled(Tooltip)`
+  div:not(.react-tooltip-arrow) {
+    cursor: pointer;
+    padding: 8px 15px;
+    
+    &:hover {
+      background-color: rgba(36, 36, 36, 0.2);
+    }
+  }
+  
+  svg {
+    vertical-align: middle;
+  }
+`;
+
 export default function DefenderSection() {
   const [searchParams, _setSearchParams] = useSearchParams();
   const pokemonId = searchParams.get('pokemonId');
@@ -99,14 +115,14 @@ export default function DefenderSection() {
     <h1>
       <Shield01Icon />
       Guard
-      <span onClick={() => setIsScaleShields(!isScaleShields)}>•••</span>
+      <span data-tooltip-id="defender-tooltip">•••</span>
     </h1>
     <table>
       <thead>
       <tr>
-        <th colSpan={2}>Pokemon</th>
-        <th>Move Name</th>
-        <th>Damage Received</th>
+        <th className="left-align" colSpan={2}>Pokemon</th>
+        <th className="left-align">Move Name</th>
+        <th className="left-align">Damage Received</th>
       </tr>
       </thead>
       <>
@@ -134,5 +150,13 @@ export default function DefenderSection() {
         })}
       </>
     </table>
+    <ConfigureTooltip id="defender-tooltip"
+                      variant={'light'}
+                      style={{padding: '0'}}
+                      clickable
+                      openOnClick>
+      <div onClick={() => setIsScaleShields(!isScaleShields)}>Scale Based On: {isScaleShields ? 'Shield HP (180HP)' : 'Stamina HP'}</div>
+      <div>Help <HelpCircleIcon /></div>
+    </ConfigureTooltip>
   </DefenderSectionContainer>;
 }

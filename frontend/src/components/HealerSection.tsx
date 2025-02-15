@@ -9,15 +9,15 @@ import NotFound from "../assets/not_found.png";
 import {useSearchParams} from "react-router-dom";
 import HealerExplanation from "./HealerExplanation";
 
-const styleThreshold = 700;
+const styleThreshold = 900;
 
 const HealerSectionContainer = styled.div`
-  width: 30%;
-  
+  width: 28vw;
+  background-color: rgba(36, 36, 36, 0.8);
+
   h1 {
     margin: 0;
     padding: 5px 10px;
-    background-color: #242424;
 
     svg {
       vertical-align: middle;
@@ -36,8 +36,12 @@ const HealerSectionContainer = styled.div`
   
   table {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 58px);
 
+    td {
+      font-size: 0.9em;
+    }
+    
     td.preview-image {
       text-align: center;
     }
@@ -85,8 +89,8 @@ export default function HealerSection() {
     <table>
       <thead>
         <tr>
-          <th colSpan={2}>Pokemon</th>
-          <th>Damage Healed</th>
+          <th className="left-align" colSpan={2}>Pokemon</th>
+          <th className="left-align">Damage Healed</th>
         </tr>
       </thead>
       <tbody>
