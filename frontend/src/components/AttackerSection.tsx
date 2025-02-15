@@ -42,6 +42,12 @@ const AttackerSectionContainer = styled.div`
     td.preview-image {
       text-align: center;
     }
+
+    td.damage {
+      font-weight: 500;
+      text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;
+      padding: 5px;
+    }
     
     img {
       height: 4em;
@@ -96,7 +102,7 @@ export default function AttackerSection() {
             </td>
             <td className="capitalize">{attacker.pokemonName}</td>
             <td>{attacker.maxMoveName}</td>
-            <td>{attacker.damage}</td>
+            <td className="damage">{attacker.damage}</td>
           </tr>;
         }))}
       </tbody>

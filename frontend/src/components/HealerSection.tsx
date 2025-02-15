@@ -42,6 +42,12 @@ const HealerSectionContainer = styled.div`
       text-align: center;
     }
 
+    td.damage {
+      font-weight: 500;
+      text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;
+      padding: 5px;
+    }
+
     img {
       height: 4em;
     }
@@ -91,7 +97,7 @@ export default function HealerSection() {
                      fallback={NotFound} />
             </td>
             <td className="capitalize">{healer.pokemonName}</td>
-            <td>{healer.maxHealingAmount}</td>
+            <td className="damage">{healer.maxHealingAmount}</td>
           </tr>;
         }))}
       </tbody>

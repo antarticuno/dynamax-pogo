@@ -49,6 +49,12 @@ const DefenderSectionContainer = styled.div`
       text-align: center;
       border-bottom: 3px solid white;
     }
+    
+    td.damage {
+      font-weight: 500;
+      text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;
+      padding: 5px;
+    }
 
     img {
       height: 4em;
@@ -121,7 +127,7 @@ export default function DefenderSection() {
                   </>
                 }
                 <td>{move.moveName}</td>
-                <td style={{background: colorScale(move.damage)}}>{move.damage}</td>
+                <td className="damage" style={{background: colorScale(move.damage)}}>{move.damage}</td>
               </tr>)
             })}
           </DefenderTableBlock>
