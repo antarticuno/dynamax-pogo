@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import HealerPokemonInterface from "../types/HealerPokemonInterface";
 import {fetchHealerPokemon} from "../service/apiClient";
 import styled from "styled-components";
-import {FavouriteIcon, HelpCircleIcon} from "hugeicons-react";
+import {FavouriteIcon} from "hugeicons-react";
 import Image from "rc-image";
 // @ts-ignore
 import NotFound from "../assets/not_found.png";
@@ -21,6 +21,8 @@ const HealerSectionContainer = styled.div`
   h1 {
     margin: 0;
     padding: 5px 10px;
+    position: sticky;
+    top: 0;
     backdrop-filter: blur(10px);
     
     & > span {
@@ -142,7 +144,6 @@ export default function HealerSection() {
                       clickable
                       openOnClick>
       <div onClick={() => setContent(<HealerExplanation />)}>About Max Spirit</div>
-      <div>Help <HelpCircleIcon /></div>
     </ConfigureTooltip>
   </HealerSectionContainer>;
 }

@@ -16,15 +16,13 @@ const styleThreshold = 900;
 
 const DefenderSectionContainer = styled.div`
   width: 29vw;
-  max-height: 100vh;
-  overflow-y: scroll;
   background-color: rgba(36, 36, 36, 0.8);
 
   h1 {
     margin: 0;
     padding: 5px 10px;
     position: sticky;
-    top: 0px;
+    top: 0;
     backdrop-filter: blur(20px);
 
     & > span {
@@ -42,6 +40,11 @@ const DefenderSectionContainer = styled.div`
   
   @media(max-width: ${styleThreshold}px) {
     width: 100%;
+  }
+  
+  #table-container {
+    max-height: calc(100vh - 58px);
+    overflow-y: scroll;
   }
   
   table {
@@ -120,39 +123,41 @@ export default function DefenderSection() {
       Guard
       <span data-tooltip-id="defender-tooltip">•••</span>
     </h1>
-    <table>
-      <thead>
-      <tr>
-        <th className="left-align" colSpan={2}>Pokemon</th>
-        <th className="left-align">Move Name</th>
-        <th className="left-align">Damage Received</th>
-      </tr>
-      </thead>
-      <>
-        {defenderPokemon.map(dpkmn => {
-          return <DefenderTableBlock key={`defender-${dpkmn.pokemonName}`}>
-            {dpkmn.damageCalculations.map((move, idx) => {
-              const colorScale = d3.scaleLinear(
-                isScaleShields ? [1, 60, 180] : [1, dpkmn.pokemonStamina / 2, dpkmn.pokemonStamina],
-                ['green', 'yellow', 'red']);
-              return (<tr key={`defender-${dpkmn.pokemonName}-${idx}`}>
-                {idx === 0 &&
-                  <>
-                    <td className="preview-image" rowSpan={defenderPokemon.length}>
-                      <Image src={dpkmn.pokemonImgUrl}
-                             fallback={NotFound} />
-                    </td>
-                    <td className="capitalize preview-image" rowSpan={defenderPokemon.length}>{dpkmn.pokemonName}</td>
-                  </>
-                }
-                <td>{move.moveName}</td>
-                <td className="damage" style={{background: colorScale(move.damage)}}>{move.damage}</td>
-              </tr>)
-            })}
-          </DefenderTableBlock>
-        })}
-      </>
-    </table>
+    <div id="table-container">
+      <table>
+        <thead>
+        <tr>
+          <th className="left-align" colSpan={2}>Pokemon</th>
+          <th className="left-align">Move Name</th>
+          <th className="left-align">Damage Received</th>
+        </tr>
+        </thead>
+        <>
+          {defenderPokemon.map(dpkmn => {
+            return <DefenderTableBlock key={`defender-${dpkmn.pokemonName}`}>
+              {dpkmn.damageCalculations.map((move, idx) => {
+                const colorScale = d3.scaleLinear(
+                  isScaleShields ? [1, 60, 180] : [1, dpkmn.pokemonStamina / 2, dpkmn.pokemonStamina],
+                  ['green', 'yellow', 'red']);
+                return (<tr key={`defender-${dpkmn.pokemonName}-${idx}`}>
+                  {idx === 0 &&
+                    <>
+                      <td className="preview-image" rowSpan={defenderPokemon.length}>
+                        <Image src={dpkmn.pokemonImgUrl}
+                               fallback={NotFound} />
+                      </td>
+                      <td className="capitalize preview-image" rowSpan={defenderPokemon.length}>{dpkmn.pokemonName}</td>
+                    </>
+                  }
+                  <td>{move.moveName}</td>
+                  <td className="damage" style={{background: colorScale(move.damage)}}>{move.damage}</td>
+                </tr>)
+              })}
+            </DefenderTableBlock>
+          })}
+        </>
+      </table>
+    </div>
     <ConfigureTooltip id="defender-tooltip"
                       variant={'light'}
                       style={{padding: '0', zIndex: '4'}}

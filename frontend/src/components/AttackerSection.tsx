@@ -22,6 +22,8 @@ const AttackerSectionContainer = styled.div`
   h1 {
     margin: 0;
     padding: 5px 10px;
+    position: sticky;
+    top: 0;
     backdrop-filter: blur(10px);
 
     & > span {
@@ -142,7 +144,7 @@ export default function AttackerSection() {
     </table>
     <ConfigureTooltip id="attacker-tooltip"
                       variant={'light'}
-                      style={{padding: '0'}}
+                      style={{padding: '0', zIndex: '4'}}
                       clickable
                       openOnClick>
       <div onClick={() => setContent(<AttackerExplanation />)}>About Max Attacks</div>
