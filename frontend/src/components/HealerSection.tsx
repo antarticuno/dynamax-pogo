@@ -52,7 +52,7 @@ const HealerSectionContainer = styled.div`
     height: calc(100% - 58px);
 
     td {
-      font-size: 0.9em;
+      font-size: 1em;
     }
     
     td.preview-image {
@@ -62,7 +62,9 @@ const HealerSectionContainer = styled.div`
     td.damage {
       font-weight: 500;
       text-shadow: -1px -1px 0 #888, 1px -1px 0 #888, -1px 1px 0 #888, 1px 1px 0 #888;
-      padding: 5px;
+      padding: 5px 15px;
+      font-size: 1.4em;
+      text-align: right;
     }
 
     img {

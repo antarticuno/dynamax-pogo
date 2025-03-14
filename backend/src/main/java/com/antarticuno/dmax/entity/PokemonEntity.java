@@ -18,7 +18,7 @@ import java.util.Objects;
 @NamedNativeQuery(
         name = "find_attacker_dto",
         query = "select floor(\n" +
-                "  (attacker.attack / boss.defense) * \n" +
+                "  ((attacker.attack + 15) * .84 / (boss.defense * .8)) * \n" +
                 "  (power / 2) * \n" +
                 "  (case when attacker.type_1 = max_move.type or coalesce(attacker.type_2, '') = max_move.type then 1.2 else 1 end) *\n" +
                 "  coalesce(tm1.multiplier, 1) *\n" +
