@@ -1,6 +1,5 @@
 package com.antarticuno.dmax.controller;
 
-import com.antarticuno.dmax.entity.PokemonEntity;
 import com.antarticuno.dmax.model.PokemonDTO;
 import com.antarticuno.dmax.service.PokemonManagerService;
 import org.json.JSONObject;

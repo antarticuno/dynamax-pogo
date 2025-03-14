@@ -35,7 +35,7 @@ public class MaxMoveCalculator {
      */
     @GetMapping("/strike")
     public List<AttackerPokemonDTO> bestAttackersForBoss(@RequestParam Integer bossPokemonId,
-                                                         @RequestParam(defaultValue = "5") Integer limit) {
+                                                         @RequestParam(defaultValue = "6") Integer limit) {
         return pokemonRepository.findBestAttackers(bossPokemonId, PageRequest.of(0, limit));
     }
 
@@ -82,7 +82,7 @@ public class MaxMoveCalculator {
      * @return the list of Pokemon and how much they heal
      */
     @GetMapping("/spirit")
-    public List<HealerPokemonDTO> bestHealers(@RequestParam(defaultValue = "5") Integer limit) {
+    public List<HealerPokemonDTO> bestHealers(@RequestParam(defaultValue = "6") Integer limit) {
         return pokemonRepository.findBestHealers(PageRequest.of(0, limit));
     }
 
