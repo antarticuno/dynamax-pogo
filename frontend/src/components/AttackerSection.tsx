@@ -47,10 +47,21 @@ const AttackerSectionContainer = styled.div`
       top: 0px;
     }
   }
+
+  #table-container {
+    max-height: calc(100vh - 58px);
+    overflow-y: scroll;
+  }
   
   table {
     width: 100%;
     height: calc(100% - 58px);
+    
+    thead {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(20px);
+    }
     
     td {
       font-size: 1em;
@@ -122,6 +133,7 @@ export default function AttackerSection() {
       Strike
       <span data-tooltip-id="attacker-tooltip">•••</span>
     </h1>
+    <div id="table-container">
     <table>
       <thead>
         <tr>
@@ -144,6 +156,7 @@ export default function AttackerSection() {
         }))}
       </tbody>
     </table>
+    </div>
     <ConfigureTooltip id="attacker-tooltip"
                       variant={'light'}
                       style={{padding: '0', zIndex: '4'}}

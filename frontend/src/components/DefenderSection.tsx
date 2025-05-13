@@ -50,6 +50,13 @@ const DefenderSectionContainer = styled.div`
   table {
     border-spacing: 0;
     width: 100%;
+    height: calc(100% - 58px);
+    
+    thead {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(20px);
+    }
 
     td.preview-image {
       text-align: center;

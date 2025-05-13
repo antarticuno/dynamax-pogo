@@ -35,7 +35,7 @@ public class MaxMoveCalculator {
      */
     @GetMapping("/strike")
     public List<AttackerPokemonDTO> bestAttackersForBoss(@RequestParam Integer bossPokemonId,
-                                                         @RequestParam(defaultValue = "6") Integer limit) {
+                                                         @RequestParam(defaultValue = "20") Integer limit) {
         return pokemonRepository.findBestAttackers(bossPokemonId, PageRequest.of(0, limit));
     }
 
