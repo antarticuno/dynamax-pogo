@@ -1,5 +1,5 @@
 export default interface HealerPokemonInterface {
-  pokemonId: number,
+  pokemonId: string,
   pokemonName: string,
   pokemonImgUrl: string,
   maxHealingAmount: number

@@ -108,7 +108,7 @@ export default function AttackerSection() {
 
   useEffect(() => {
     const initialize = async () => {
-      const bossPokemonId = !!pokemonId ? Number(pokemonId) : undefined;
+      const bossPokemonId = !!pokemonId ? pokemonId : undefined;
       if (!!bossPokemonId) {
         const response = await fetchAttackerPokemon(bossPokemonId);
         setAttackerPokemon(response);

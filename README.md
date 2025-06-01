@@ -65,4 +65,20 @@ curl -m 70 -X POST http://localhost:8080/api/v1/manage/dynamax?pokemonId=99
 ```
 UPDATE `pogo`.`pokemon` SET `img_url` = 'https://assets.dittobase.com/go/pokemon/555-darmanitan-standard.png' WHERE (`pokemon_id` = '555');
 UPDATE `pogo`.`pokemon` SET `img_url` = 'https://assets.dittobase.com/go/pokemon/849-toxtricity-amped.png' WHERE (`pokemon_id` = '849');
+-- Urshifu
+INSERT INTO `pogo`.`pokemon` (`name`, `attack`, `defense`, `stamina`, `type_1`, `type_2`, `img_url`, `max_available`, `pokemon_id`) VALUES ('urshifu (single strike)', '254', '177', '225', 'fighting', 'dark', 'https://assets.dittobase.com/go/pokemon/892-urshifu-single-strike.png', '1', '892-single-strike');
+INSERT INTO `pogo`.`pokemon` (`name`, `attack`, `defense`, `stamina`, `type_1`, `type_2`, `img_url`, `max_available`, `pokemon_id`) VALUES ('urshifu (rapid strike)', '254', '177', '225', 'fighting', 'water', 'https://assets.dittobase.com/go/pokemon/892-urshifu-rapid-strike.png', '1', '892-rapid-strike');
+insert into move
+select type, name, power, concat(pokemon_id, '-rapid-strike'), null, variant from move where pokemon_id = '892';
+insert into move
+select type, name, power, concat(pokemon_id, '-single-strike'), null, variant from move where pokemon_id = '892';
+INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('water', 'Aqua Jet', '70', '892-rapid-strike', 'CHARGED');
+INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('water', 'Waterfall', '12', '892-rapid-strike', 'FAST');
+INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('dark', 'Sucker Punch', '8', '892-single-strike', 'FAST');
+INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('dark', 'Payback', '110', '892-single-strike', 'CHARGED');
+INSERT INTO `pogo`.`max_move` (`type`, `name`, `power`, `pokemon_id`) VALUES ('fighting', 'Max Knuckle', '350', '892-rapid-strike');
+INSERT INTO `pogo`.`max_move` (`type`, `name`, `power`, `pokemon_id`) VALUES ('water', 'Max Geyser', '350', '892-rapid-strike');
+INSERT INTO `pogo`.`max_move` (`type`, `name`, `power`, `pokemon_id`) VALUES ('fighting', 'Max Knuckle', '350', '892-single-strike');
+INSERT INTO `pogo`.`max_move` (`type`, `name`, `power`, `pokemon_id`) VALUES ('dark', 'Max Darkness', '350', '892-single-strike');
+
 ```

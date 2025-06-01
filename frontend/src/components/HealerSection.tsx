@@ -101,7 +101,7 @@ export default function HealerSection() {
     };
 
     initialize();
-  }, [healerPokemon]);
+  }, []);
 
   if (!pokemonId) {
     return <HealerSectionContainer>

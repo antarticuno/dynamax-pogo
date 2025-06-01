@@ -5,13 +5,14 @@ import DefenderPokemonInterface from "../types/DefenderPokemonInterface";
 
 const backendUrl = 'http://localhost:8080';
 
-const fetchPokemon = async (pokemonId: number) => {
+const fetchPokemon = async (pokemonId: string) => {
   let queryUrl = `${backendUrl}/api/v1/manage?pokemonId=${pokemonId}`;
   const response = await fetch(queryUrl);
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
   const data: PokemonInterface = await response.json();
+  console.log(data);
   return data;
 }
 
@@ -39,7 +40,7 @@ const fetchHealerPokemon = async () => {
 }
 
 
-const fetchAttackerPokemon = async (pokemonId: number) => {
+const fetchAttackerPokemon = async (pokemonId: string) => {
   let queryUrl = `${backendUrl}/api/v1/strike?bossPokemonId=${pokemonId}`;
   const response = await fetch(queryUrl);
   if (!response.ok) {
@@ -49,7 +50,7 @@ const fetchAttackerPokemon = async (pokemonId: number) => {
   return data;
 }
 
-const fetchDefenderPokemon = async (pokemonId: number) => {
+const fetchDefenderPokemon = async (pokemonId: string) => {
   let queryUrl = `${backendUrl}/api/v1/guard?bossPokemonId=${pokemonId}`;
   const response = await fetch(queryUrl);
   if (!response.ok) {

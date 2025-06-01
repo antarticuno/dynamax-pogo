@@ -106,7 +106,7 @@ export default function DefenderSection() {
   const {setContent} = useContext(CustomModalContext);
 
   useEffect(() => {
-    const bossPokemonId = !!pokemonId ? Number(pokemonId) : undefined;
+    const bossPokemonId = !!pokemonId ? pokemonId : undefined;
     const initialize = async () => {
       if (!!bossPokemonId) {
         const response = await fetchDefenderPokemon(bossPokemonId);

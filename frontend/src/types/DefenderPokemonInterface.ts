@@ -1,5 +1,5 @@
 export default interface DefenderPokemonInterface {
-  pokemonId: number,
+  pokemonId: string,
   pokemonName: string,
   pokemonImgUrl: string,
   pokemonStamina: number,

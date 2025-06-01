@@ -1,5 +1,5 @@
 export default interface AttackerPokemonInterface {
-  pokemonId: number,
+  pokemonId: string,
   pokemonName: string,
   pokemonImgUrl: string,
   maxMoveName: string,

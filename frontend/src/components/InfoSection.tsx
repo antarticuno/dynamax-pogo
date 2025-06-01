@@ -94,7 +94,7 @@ export default function InfoSection() {
 
   useEffect(() => {
     const initialize = async () => {
-      const pokemonId = !!searchParams.get('pokemonId') ? Number(searchParams.get('pokemonId')) : undefined;
+      const pokemonId = !!searchParams.get('pokemonId') ? searchParams.get('pokemonId') : undefined;
       if (pokemonId) {
         const response = await fetchPokemon(pokemonId);
         setCurrentPokemon(response);
