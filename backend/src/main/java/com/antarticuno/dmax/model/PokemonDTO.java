@@ -14,4 +14,8 @@ public class PokemonDTO {
     private int defense;
     private int stamina;
     private String imgUrl;
+
+    public int getPokemonNumber() {
+        return Integer.parseInt(pokemonId.replaceAll("\\D", ""));
+    }
 }
