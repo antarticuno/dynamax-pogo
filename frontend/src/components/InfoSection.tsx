@@ -88,7 +88,7 @@ const InfoSectionContainer = styled.div`
 
 export default function InfoSection() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [isSelecting, setIsSelecting] = useState<boolean>(true);
+  const [isSelecting, setIsSelecting] = useState<boolean>(!searchParams.get('pokemonId'));
   const [allPokemon, setAllPokemon] = useState<PokemonInterface[]>([]);
   const [currentPokemon, setCurrentPokemon] = useState<PokemonInterface | undefined>(undefined);
 

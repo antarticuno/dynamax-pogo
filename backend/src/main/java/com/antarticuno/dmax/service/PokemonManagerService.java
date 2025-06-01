@@ -262,7 +262,7 @@ public class PokemonManagerService {
                     .toLowerCase());
             newMove.setName(moveJson.getJSONObject("names").getString("English"));
             newMove.setPokemonKey(pokemonId);
-            newMove.setPower(moveJson.getJSONObject("combat").getInt("power"));
+            newMove.setPower(moveJson.getInt("power"));
             newMove.setVariant(moveVariant);
             moves.add(newMove);
         }
