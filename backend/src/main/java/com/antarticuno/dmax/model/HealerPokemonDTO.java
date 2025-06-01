@@ -9,7 +9,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class HealerPokemonDTO {
 
-    private int pokemonId;
+    private String pokemonId;
 
     private String pokemonName;
 

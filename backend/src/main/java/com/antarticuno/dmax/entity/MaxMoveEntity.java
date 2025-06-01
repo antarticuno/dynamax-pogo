@@ -32,8 +32,8 @@ public class MaxMoveEntity {
     @Column(name = "power")
     private int power;
     @Basic
-    @Column(name = "pokemon_key")
-    private int pokemonKey;
+    @Column(name = "pokemon_id")
+    private String pokemonKey;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "move_key")

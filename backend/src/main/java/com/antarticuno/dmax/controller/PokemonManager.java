@@ -28,7 +28,7 @@ public class PokemonManager {
      * @return the pokemon if found
      */
     @GetMapping
-    public Optional<PokemonDTO> getPokemonFromDb(@RequestParam Integer pokemonId) {
+    public Optional<PokemonDTO> getPokemonFromDb(@RequestParam String pokemonId) {
         return pokemonManagerService.getPokemonFromDb(pokemonId)
                 .map(pokemonManagerService::mapPokemonToDTO);
     }
@@ -48,7 +48,7 @@ public class PokemonManager {
      * @param pokemonId the pokemon id in question
      */
     @GetMapping("/fetch")
-    public JSONObject getPokemonFromApi(@RequestParam Integer pokemonId) {
+    public JSONObject getPokemonFromApi(@RequestParam String pokemonId) {
         return pokemonManagerService.getPokemonFromApi(pokemonId).orElse(null);
     }
 
@@ -57,7 +57,7 @@ public class PokemonManager {
      * @param pokemonId the pokemon id in question
      */
     @PostMapping
-    public void saveNewPokemon(@RequestParam Integer pokemonId) {
+    public void saveNewPokemon(@RequestParam String pokemonId) {
         pokemonManagerService.savePokemonIntoDb(pokemonId);
     }
 
@@ -66,7 +66,7 @@ public class PokemonManager {
      * @param pokemonId the pokemon id in question
      */
     @PostMapping("/dynamax")
-    public void dynamaxEnablePokemon(@RequestParam Integer pokemonId) {
+    public void dynamaxEnablePokemon(@RequestParam String pokemonId) {
         pokemonManagerService.upgradePokemonToDynamax(pokemonId);
     }
 
@@ -75,7 +75,7 @@ public class PokemonManager {
      * @param pokemonId the pokemon id in question
      */
     @DeleteMapping
-    public void deletePokemon(@RequestParam Integer pokemonId) {
+    public void deletePokemon(@RequestParam String pokemonId) {
         pokemonManagerService.deletePokemon(pokemonId);
     }
 }

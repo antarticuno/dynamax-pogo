@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface MoveRepository extends CrudRepository<MoveEntity, Integer> {
 
-    List<MoveEntity> findAllByPokemonKey(Integer pokemonKey);
+    List<MoveEntity> findAllByPokemonKey(String pokemonKey);
 }

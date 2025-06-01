@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class DefenderPokemonDTO {
 
-    private int pokemonId;
+    private String pokemonId;
 
     private String pokemonName;
 

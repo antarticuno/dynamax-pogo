@@ -15,13 +15,13 @@ import java.util.List;
  * For fetching the Pokemon
  */
 @Repository
-public interface PokemonRepository extends CrudRepository<PokemonEntity, Integer> {
+public interface PokemonRepository extends CrudRepository<PokemonEntity, String> {
 
     @Query(nativeQuery = true, name="find_attacker_dto")
-    List<AttackerPokemonDTO> findBestAttackers(Integer bossPokemonId, Pageable limit);
+    List<AttackerPokemonDTO> findBestAttackers(String bossPokemonId, Pageable limit);
 
     @Query(nativeQuery = true, name="find_defender_dto")
-    List<DefenderPokemonResultInfoDTO> findBestDefenders(Integer bossPokemonId, Pageable limit);
+    List<DefenderPokemonResultInfoDTO> findBestDefenders(String bossPokemonId, Pageable limit);
 
     @Query("select new com.antarticuno.dmax.model.HealerPokemonDTO(pokemon.pokemonKey, pokemon.name, pokemon.imgUrl, 0.16 * pokemon.stamina) " +
             "from PokemonEntity pokemon " +

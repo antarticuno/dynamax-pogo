@@ -78,7 +78,7 @@ public class PokemonManagerService {
      * @param pokedexId the pokemon in question
      * @return the pokemon if found
      */
-    public Optional<PokemonEntity> getPokemonFromDb(Integer pokedexId) {
+    public Optional<PokemonEntity> getPokemonFromDb(String pokedexId) {
         return pokemonRepository.findById(pokedexId);
     }
 
@@ -94,7 +94,7 @@ public class PokemonManagerService {
      * Fetches the pokemon details for the given pokedex id
      * @param pokedexId the pokemon to search for
      */
-    public Optional<JSONObject> getPokemonFromApi(Integer pokedexId) {
+    public Optional<JSONObject> getPokemonFromApi(String pokedexId) {
         final String getUrl = String.format("%s%s/id/%s.json", API_URL, POKEDEX_API, pokedexId);
         try {
             final JSONObject response = new JSONObject(getRequest(getUrl));
@@ -110,14 +110,14 @@ public class PokemonManagerService {
      * Fetch the given pokemon from the API, then save it into the database
      * @param pokedexId the pokemon in question
      */
-    public void savePokemonIntoDb(Integer pokedexId) {
+    public void savePokemonIntoDb(String pokedexId) {
         if (getPokemonFromDb(pokedexId).isPresent()) {
             throw new UnsupportedOperationException("Can't save this pokemon because it already exists. Try deleting it first.");
         }
         final JSONObject pokemonResponse = getPokemonFromApi(pokedexId).orElseThrow(() -> new RuntimeException("No pokemon with that ID"));
 
         final PokemonEntity pokemon = new PokemonEntity();
-        pokemon.setPokemonKey(pokemonResponse.getInt("dexNr"));
+        pokemon.setPokemonKey(String.format("%s", pokemonResponse.getInt("dexNr")));
         pokemon.setName(pokemonResponse.getJSONObject("names").getString("English").toLowerCase());
         pokemon.setAttack(pokemonResponse.getJSONObject("stats").getInt("attack"));
         pokemon.setDefense(pokemonResponse.getJSONObject("stats").getInt("defense"));
@@ -214,7 +214,7 @@ public class PokemonManagerService {
      * Upgrade a pokemon already in the database to be max_available and have max moves.
      * @param pokemonId the pokemon in question
      */
-    public void upgradePokemonToDynamax(Integer pokemonId) {
+    public void upgradePokemonToDynamax(String pokemonId) {
         final PokemonEntity pokemon = getPokemonFromDb(pokemonId).orElseThrow(() -> new RuntimeException("Pokemon not found."));
         pokemon.setMaxAvailable(true);
         pokemon.setGmaxImgUrl(String.format("https://assets.dittobase.com/go/pokemon/%s-%s-gigantamax.png", pokemon.getPokemonKey(), pokemon.getName()));
@@ -248,7 +248,7 @@ public class PokemonManagerService {
      * @param pokemonId   the pokemon that this is for
      * @return a list of generated MoveEntities
      */
-    protected List<MoveEntity> generateMoveList(JSONObject jsonObject, Integer pokemonId) {
+    protected List<MoveEntity> generateMoveList(JSONObject jsonObject, String pokemonId) {
         final Iterable<String> keys = jsonObject.keySet();
         final List<MoveEntity> moves = new ArrayList<>();
         for (String key : keys) {
@@ -273,7 +273,7 @@ public class PokemonManagerService {
      * Delete the desired pokemon and all of its associated moves (fk dependencies)
      * @param pokedexId
      */
-    public void deletePokemon(Integer pokedexId) {
+    public void deletePokemon(String pokedexId) {
         pokemonRepository.deleteById(pokedexId);
     }
 

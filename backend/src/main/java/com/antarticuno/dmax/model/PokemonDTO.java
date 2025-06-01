@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class PokemonDTO {
     private String pokemonName;
-    private Integer pokemonId;
+    private String pokemonId;
     private String primaryType;
     private String secondaryType;
     private int attack;

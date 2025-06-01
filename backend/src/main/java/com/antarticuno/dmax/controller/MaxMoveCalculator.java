@@ -34,7 +34,7 @@ public class MaxMoveCalculator {
      * @return the list of pokemon and how much damage they can deal using their best max moves
      */
     @GetMapping("/strike")
-    public List<AttackerPokemonDTO> bestAttackersForBoss(@RequestParam Integer bossPokemonId,
+    public List<AttackerPokemonDTO> bestAttackersForBoss(@RequestParam String bossPokemonId,
                                                          @RequestParam(defaultValue = "20") Integer limit) {
         return pokemonRepository.findBestAttackers(bossPokemonId, PageRequest.of(0, limit));
     }
@@ -46,7 +46,7 @@ public class MaxMoveCalculator {
      * @return the list of pokemon and how much damage they take from each move
      */
     @GetMapping("/guard")
-    public List<DefenderPokemonDTO> bestDefendersForBoss(@RequestParam Integer bossPokemonId,
+    public List<DefenderPokemonDTO> bestDefendersForBoss(@RequestParam String bossPokemonId,
                                                         @RequestParam(defaultValue = "-1") Integer limit) {
         final Map<String, List<DefenderPokemonResultInfoDTO>> defenderMap = pokemonRepository.findBestDefenders(bossPokemonId, PageRequest.of(0, limit < 0 ? Integer.MAX_VALUE : limit))
                 .stream()
