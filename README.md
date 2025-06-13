@@ -15,7 +15,10 @@ This is a website for displaying dynamax/gigantamax battle information. The Dyna
 
 ## Docker Commands
 ```
-docker build -t dynamax-pogo .
+docker build \
+ --platform linux/amd64 \
+ -t us-west2-docker.pkg.dev/antarticuno-home/docker/dynamax-pogo:1.0.0 \
+ .
 
 docker run -d \
   -p 8080:8080 \
@@ -23,7 +26,10 @@ docker run -d \
   -e PASSWORD=_____ \
   -e DB="__________:3306" \
   -e AUTH_TOKEN=__________ \
-  dynamax-pogo
+  --platform=linux/amd64 \
+  us-west2-docker.pkg.dev/antarticuno-home/docker/dynamax-pogo:1.0.0
+  
+docker push us-west2-docker.pkg.dev/antarticuno-home/docker/dynamax-pogo:1.0.0
 ```
 
 ## Curls for Fetching All Data

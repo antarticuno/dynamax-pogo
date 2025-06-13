@@ -14,7 +14,7 @@ WORKDIR /app/backend
 RUN gradle bootJar
 
 # Stage 3: Final runtime image using Java 11
-FROM eclipse-temurin:11-jre
+FROM openjdk:11
 WORKDIR /app
 COPY --from=backend-builder /app/backend/build/libs/*.jar app.jar
 EXPOSE 8080

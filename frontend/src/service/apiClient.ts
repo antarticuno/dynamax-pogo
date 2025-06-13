@@ -3,7 +3,7 @@ import AttackerPokemonInterface from "../types/AttackerPokemonInterface";
 import PokemonInterface from "../types/PokemonInterface";
 import DefenderPokemonInterface from "../types/DefenderPokemonInterface";
 
-const backendUrl = 'http://localhost:8080';
+const backendUrl = 'https://dynamax-pogo-845399893871.us-central1.run.app';
 
 const fetchPokemon = async (pokemonId: string) => {
   let queryUrl = `${backendUrl}/api/v1/manage?pokemonId=${pokemonId}`;
