@@ -1,5 +1,6 @@
 package com.antarticuno.dmax.controller;
 
+import com.antarticuno.dmax.config.AuthCheck;
 import com.antarticuno.dmax.model.PokemonDTO;
 import com.antarticuno.dmax.service.PokemonManagerService;
 import org.json.JSONObject;
@@ -59,6 +60,7 @@ public class PokemonManager {
      * Fetches the pokemon from the global API and persists it into the database
      * @param pokemonId the pokemon id in question
      */
+    @AuthCheck
     @PostMapping
     public void saveNewPokemon(@RequestParam String pokemonId) {
         pokemonManagerService.savePokemonIntoDb(pokemonId);
@@ -68,6 +70,7 @@ public class PokemonManager {
      * Upgrades the pokemon in the database and creates new max moves for the pokemon
      * @param pokemonId the pokemon id in question
      */
+    @AuthCheck
     @PostMapping("/dynamax")
     public void dynamaxEnablePokemon(@RequestParam String pokemonId) {
         pokemonManagerService.upgradePokemonToDynamax(pokemonId);
@@ -77,6 +80,7 @@ public class PokemonManager {
      * Deletes the specified pokemon by id if present
      * @param pokemonId the pokemon id in question
      */
+    @AuthCheck
     @DeleteMapping
     public void deletePokemon(@RequestParam String pokemonId) {
         pokemonManagerService.deletePokemon(pokemonId);

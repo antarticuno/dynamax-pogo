@@ -22,6 +22,7 @@ docker run -d \
   -e USER=_____ \
   -e PASSWORD=_____ \
   -e DB="__________:3306" \
+  -e AUTH_TOKEN=__________ \
   dynamax-pogo
 ```
 
