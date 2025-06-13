@@ -13,6 +13,18 @@ This is a website for displaying dynamax/gigantamax battle information. The Dyna
 ./gradlew bootRun
 ```
 
+## Docker Commands
+```
+docker build -t dynamax-pogo .
+
+docker run -d \
+  -p 8080:8080 \
+  -e USER=_____ \
+  -e PASSWORD=_____ \
+  -e DB="__________:3306" \
+  dynamax-pogo
+```
+
 ## Curls for Fetching All Data
 ```
 curl -m 70 -X POST http://localhost:8080/api/v1/manage?pokemonId=[1-1008]

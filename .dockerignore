@@ -1,0 +1,5 @@
+node_modules
+build
+.gradle
+frontend/node_modules
+backend/build

@@ -37,12 +37,3 @@ dependencies {
 springBoot {
     mainClass.set("com.antarticuno.dmax.MainApplication") // Replace with your main class path
 }
-
-tasks.register<Exec>("buildFrontend") {
-    workingDir = file("../frontend")
-    commandLine = listOf("npm", "run", "build")
-}
-
-tasks.bootJar {
-    dependsOn("buildFrontend")
-}
