@@ -3,7 +3,7 @@ import {fetchDefenderPokemon} from "../service/apiClient";
 import {useSearchParams} from "react-router-dom";
 import * as d3 from 'd3';
 import styled from "styled-components";
-import {HelpCircleIcon, Shield01Icon} from "hugeicons-react";
+import {Shield01Icon} from "hugeicons-react";
 import DefenderPokemonInterface from "../types/DefenderPokemonInterface";
 import Image from "rc-image";
 // @ts-ignore
@@ -38,10 +38,6 @@ const DefenderSectionContainer = styled.div`
     }
   }
   
-  @media(max-width: ${styleThreshold}px) {
-    width: 100%;
-  }
-  
   #table-container {
     max-height: calc(100vh - 58px);
     overflow-y: scroll;
@@ -73,6 +69,20 @@ const DefenderSectionContainer = styled.div`
 
     img {
       height: 4em;
+    }
+  }
+
+  @media(max-width: ${styleThreshold}px) {
+    width: 100%;
+
+    h1 {
+      position: sticky;
+      top: calc(15vw + 20px);
+      z-index: 2;
+    }
+
+    #table-container {
+      max-height: unset;
     }
   }
 `;
@@ -119,7 +129,7 @@ export default function DefenderSection() {
 
   if (!pokemonId) {
     return <DefenderSectionContainer>
-      <h1>
+      <h1 id="defend-header">
         <Shield01Icon />
         Guard
       </h1>
@@ -127,7 +137,7 @@ export default function DefenderSection() {
     </DefenderSectionContainer>;
   }
   return <DefenderSectionContainer>
-    <h1>
+    <h1 id="defend-header">
       <Shield01Icon />
       Guard
       <span data-tooltip-id="defender-tooltip">•••</span>
@@ -174,7 +184,7 @@ export default function DefenderSection() {
                       openOnClick>
       <div onClick={() => setContent(<DefenderExplanation />)}>About Max Guard</div>
       <div onClick={() => setIsScaleShields(!isScaleShields)}>Color Scale: {isScaleShields ? 'Shield HP (180HP)' : 'Stamina HP'}</div>
-      <div>Help <HelpCircleIcon /></div>
+      {/*<div>Help <HelpCircleIcon /></div>*/}
     </ConfigureTooltip>
   </DefenderSectionContainer>;
 }

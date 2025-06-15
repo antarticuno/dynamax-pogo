@@ -82,7 +82,7 @@ public class MaxMoveCalculator {
      * @return the list of Pokemon and how much they heal
      */
     @GetMapping("/spirit")
-    public List<HealerPokemonDTO> bestHealers(@RequestParam(defaultValue = "6") Integer limit) {
+    public List<HealerPokemonDTO> bestHealers(@RequestParam(defaultValue = "10") Integer limit) {
         return pokemonRepository.findBestHealers(PageRequest.of(0, limit));
     }
 

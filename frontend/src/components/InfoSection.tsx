@@ -8,6 +8,8 @@ import styled from "styled-components";
 // @ts-ignore
 import NotFound from "../assets/not_found.png";
 import Image from "rc-image";
+import {Menu01Icon} from "hugeicons-react";
+import {Tooltip} from "react-tooltip";
 
 const styleThreshold = 900;
 
@@ -58,19 +60,29 @@ const InfoSectionContainer = styled.div`
   @media(max-width: ${styleThreshold}px) {
     flex-direction: row;
     position: sticky;
-    z-index: 5;
+    z-index: 3;
     top: 0;
-    padding: 20px 0 30px 0;
+    padding: 10px 0;
     max-width: 100vw;
     background-color: #242424;
     border-bottom: 10px double #fff;
     
     h1 {
-      font-size: 1.3em;
+      font-size: 1em;
+      
+      &.clickable::after {
+        content: '\u2304';
+        vertical-align: text-bottom;
+        margin-left: 3px;
+      }
     }
     
     h3 {
-      font-size: 0.9em;
+      font-size: 0.7em;
+      
+      &:last-of-type {
+        text-align: right;
+      }
     }
     
     .vertical {
@@ -79,9 +91,27 @@ const InfoSectionContainer = styled.div`
     }
     
     .rc-image {
-      margin: 0 20px;
+      margin: 0 10px;
       width: 15vw;
       height: 15vw;
+    }
+  }
+`;
+
+const BurgerMenu = styled(Tooltip)`
+  ul {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    
+    li {
+      cursor: pointer;
+      padding: 5px 15px;
+      margin: 0;
+      width: 100%;
+      list-style-type: none;
+      color: #242424;
     }
   }
 `;
@@ -111,6 +141,13 @@ export default function InfoSection() {
     setIsSelecting(false);
   };
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return <InfoSectionContainer>
 
       <>
@@ -125,7 +162,7 @@ export default function InfoSection() {
             >
               <option key={-1} value={''}>--select--</option>
               {allPokemon.map(pkmn => {
-                return <option key={`select-${pkmn.pokemonId}`} value={pkmn.pokemonId} className={"capitalize"}>{pkmn.pokemonName}</option>;
+                return <option key={`select-${pkmn.pokemonId}`} value={pkmn.pokemonId} className={"capitalize"}>{pkmn.pokemonName} - #{pkmn.pokemonNumber}</option>;
               })}
             </select>
             :
@@ -138,8 +175,15 @@ export default function InfoSection() {
         )}
       </>
     <div className="vertical">
-      <h3>&nbsp;</h3>
+      <h3>{window.matchMedia(`(max-width: ${styleThreshold}px)`).matches ? <Menu01Icon height={20} width={20} data-tooltip-id="burger" /> : ' '}</h3>
       <h1>Dynamax Guide</h1>
     </div>
+    <BurgerMenu id="burger" variant={'light'} place={'bottom-end'} noArrow clickable openOnClick>
+      <ul>
+        <li onClick={() => scrollToSection("attack-header")}>Attackers</li>
+        <li onClick={() => scrollToSection("defend-header")}>Defenders</li>
+        <li onClick={() => scrollToSection("heal-header")}>Healers</li>
+      </ul>
+    </BurgerMenu>
   </InfoSectionContainer>;
 }

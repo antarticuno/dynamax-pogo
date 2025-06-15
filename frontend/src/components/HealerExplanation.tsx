@@ -33,7 +33,7 @@ export default function HealerExplanation() {
       </tbody>
     </table>
     <p>
-      There are a few key things to note here. For starters, the amount of HP healed will vary from healer to healer as the percentage healed goes off of the user's current stamina/HP stat. Secondly, you'll notice that even the bulkiest users of Max Spirit currently available (Lapras in the early days) max out at about 40ish HP - this is drastically lower than the 60HP gained from using Max Guard at Lv.3. However let us not forget that Max Spirit heals the <em>entire party</em> for that amount - meaning that in the best case (~120HP), the total amount of healed HP starts to resemble something more drastic (2 shields for the price of one Max Spirit). It also helps to note that Max Spirit is currently the only way to combat spread moves as well as they are unaffected by any active taunts.
+      There are a few key things to note here. For starters, the amount of HP healed will vary from healer to healer as the percentage healed goes off of the user Pokemon's maximum available stamina/HP stat. Secondly, outside of Blissey, most users of Max Spirit currently available max out at about 40ish HP - this is drastically lower than the 60HP gained from using Max Guard at Lv.3. This might seem like justification to always favor Max Guard over Max Spirit - however, let us not forget that Max Spirit heals the <em>entire party</em> for that amount, meaning that in the best case (~120HP) the total amount of healed HP starts to resemble something more drastic (2 shields for the price of one Max Spirit). It also helps to note that Max Spirit is currently the only way to combat spread moves as well as they are unaffected by any active taunts.
     </p>
   </StyledContainer>;
 }

@@ -49,9 +49,9 @@ export default function DefenderExplanation() {
           <li>In this scenario, Excadrill's shields are particularly effective against all of Zapdos's attacks (electric, flying, rock). This however is due to Excadrill's type combination almost exclusively as Steel/Ground is able to resist each of the possible attacking types. If you consider Excadrill's defense stat, you'll notice that it is particularly lacking especially when compared to more conventional tanks like Blastoise or Metagross.</li>
         </ul>
       </li>
-      <li>Kingler vs. Articuno
+      <li>Kingler vs. Suicune
         <ul>
-          <li>In this scenario, Articuno's shields are particularly effective against the majority of Kingler's attacks (water, normal, bug). This might be shocking considering Articuno only resists Kingler's bug attacks - however, when we consider Articuno's extremely high natural defense stat we can see just how powerful a high defense stat can be when it comes to minimizing incoming neutral type-effective attacks.</li>
+          <li>In this scenario, Suicune's shields are particularly effective against the majority of Kingler's attacks (water, normal, bug). This might be shocking considering Suicune does not resist any of Kingler's attacks - however, when we consider Suicune's extremely high natural defense stat we can see just how powerful a high defense stat can be when it comes to minimizing incoming neutral type-effective attacks.</li>
         </ul>
       </li>
     </ol>

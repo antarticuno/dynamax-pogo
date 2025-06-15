@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import {fetchAttackerPokemon} from "../service/apiClient";
 import {useSearchParams} from "react-router-dom";
 import AttackerPokemonInterface from "../types/AttackerPokemonInterface";
-import {EnergyIcon, HelpCircleIcon} from "hugeicons-react";
+import {EnergyIcon} from "hugeicons-react";
 import Image from 'rc-image';
 // @ts-ignore
 import NotFound from "../assets/not_found.png";
@@ -39,15 +39,6 @@ const AttackerSectionContainer = styled.div`
     }
   }
 
-  @media(max-width: ${styleThreshold}px) {
-    width: 100%;
-
-    h1 {
-      position: sticky;
-      top: 0px;
-    }
-  }
-
   #table-container {
     max-height: calc(100vh - 58px);
     overflow-y: scroll;
@@ -81,6 +72,20 @@ const AttackerSectionContainer = styled.div`
     
     img {
       height: 4em;
+    }
+  }
+
+  @media(max-width: ${styleThreshold}px) {
+    width: 100%;
+
+    h1 {
+      position: sticky;
+      top: calc(15vw + 20px);
+      z-index: 2;
+    }
+
+    #table-container {
+      max-height: unset;
     }
   }
 `;
@@ -120,7 +125,7 @@ export default function AttackerSection() {
 
   if (!pokemonId) {
     return <AttackerSectionContainer>
-      <h1>
+      <h1 id="attack-header">
         <EnergyIcon height={30} width={30} />
         Strike
       </h1>
@@ -128,7 +133,7 @@ export default function AttackerSection() {
     </AttackerSectionContainer>
   }
   return <AttackerSectionContainer>
-    <h1>
+    <h1 id="attack-header">
       <EnergyIcon height={30} width={30} />
       Strike
       <span data-tooltip-id="attacker-tooltip">•••</span>
@@ -163,7 +168,7 @@ export default function AttackerSection() {
                       clickable
                       openOnClick>
       <div onClick={() => setContent(<AttackerExplanation />)}>About Max Attacks</div>
-      <div>Help <HelpCircleIcon /></div>
+      {/*<div>Help <HelpCircleIcon /></div>*/}
     </ConfigureTooltip>
   </AttackerSectionContainer>;
 }

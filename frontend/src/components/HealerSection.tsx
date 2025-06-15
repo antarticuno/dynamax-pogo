@@ -38,19 +38,22 @@ const HealerSectionContainer = styled.div`
     }
   }
   
-  @media(max-width: ${styleThreshold}px) {
-    width: 100%;
-    
-    h1 {
-      position: sticky;
-      top: 0;
-    }
+  #table-container {
+    max-height: calc(100vh - 58px);
+    overflow-y: scroll;
   }
   
   table {
+    border-spacing: 0;
     width: 100%;
     height: calc(100% - 58px);
-
+    
+    thead {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(20px);
+    }
+    
     td {
       font-size: 1em;
     }
@@ -71,9 +74,25 @@ const HealerSectionContainer = styled.div`
       height: 4em;
     }
   }
+
+  @media(max-width: ${styleThreshold}px) {
+    width: 100%;
+
+    h1 {
+      position: sticky;
+      top: calc(15vw + 20px);
+      z-index: 1;
+    }
+
+    #table-container {
+      max-height: unset;
+    }
+  }
 `;
 
 const ConfigureTooltip = styled(Tooltip)`
+  z-index: 2;
+  
   div:not(.react-tooltip-arrow) {
     cursor: pointer;
     padding: 8px 15px;
@@ -115,31 +134,33 @@ export default function HealerSection() {
 
 
   return <HealerSectionContainer>
-    <h1>
+    <h1 id="heal-header">
       <FavouriteIcon />
       Spirit
       <span data-tooltip-id="healer-tooltip">•••</span>
     </h1>
-    <table>
-      <thead>
-        <tr>
-          <th className="left-align" colSpan={2}>Pokemon</th>
-          <th className="left-align">Damage Healed</th>
-        </tr>
-      </thead>
-      <tbody>
-        {healerPokemon.map(((healer, idx) => {
-          return <tr key={`healer-${idx}`}>
-            <td className="preview-image">
-              <Image src={healer.pokemonImgUrl}
-                     fallback={NotFound} />
-            </td>
-            <td className="capitalize">{healer.pokemonName}</td>
-            <td className="damage">{healer.maxHealingAmount}</td>
-          </tr>;
-        }))}
-      </tbody>
-    </table>
+    <div id="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th className="left-align" colSpan={2}>Pokemon</th>
+            <th className="left-align">Damage Healed</th>
+          </tr>
+        </thead>
+        <tbody>
+          {healerPokemon.map(((healer, idx) => {
+            return <tr key={`healer-${idx}`}>
+              <td className="preview-image">
+                <Image src={healer.pokemonImgUrl}
+                       fallback={NotFound} />
+              </td>
+              <td className="capitalize">{healer.pokemonName}</td>
+              <td className="damage">{healer.maxHealingAmount}</td>
+            </tr>;
+          }))}
+        </tbody>
+      </table>
+    </div>
     <ConfigureTooltip id="healer-tooltip"
                       variant={'light'}
                       style={{padding: '0'}}
