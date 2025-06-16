@@ -39,7 +39,7 @@ const AttackerSectionContainer = styled.div`
     }
   }
 
-  #table-container {
+  #attacker-table-container {
     max-height: calc(100vh - 58px);
     overflow-y: scroll;
   }
@@ -84,7 +84,7 @@ const AttackerSectionContainer = styled.div`
       z-index: 2;
     }
 
-    #table-container {
+    #attacker-table-container {
       max-height: unset;
     }
   }
@@ -125,7 +125,8 @@ export default function AttackerSection() {
 
   if (!pokemonId) {
     return <AttackerSectionContainer>
-      <h1 id="attack-header">
+      <hr id="attack-header" className="hidden" />
+      <h1>
         <EnergyIcon height={30} width={30} />
         Strike
       </h1>
@@ -133,12 +134,13 @@ export default function AttackerSection() {
     </AttackerSectionContainer>
   }
   return <AttackerSectionContainer>
-    <h1 id="attack-header">
+    <hr id="attack-header" className="hidden" />
+    <h1>
       <EnergyIcon height={30} width={30} />
       Strike
       <span data-tooltip-id="attacker-tooltip">•••</span>
     </h1>
-    <div id="table-container">
+    <div id="attacker-table-container">
     <table>
       <thead>
         <tr>

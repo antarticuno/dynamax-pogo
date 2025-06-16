@@ -144,7 +144,7 @@ export default function InfoSection() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ block: "start", behavior: "smooth" });
     }
   };
 

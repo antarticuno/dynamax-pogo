@@ -13,6 +13,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+hr.hidden {
+  margin: 0;
+  border-width: 0;
+  position: relative;
+  top: calc(-1 * (16vw + 20px));
+}
+
 .capitalize {
   text-transform: capitalize;
 }

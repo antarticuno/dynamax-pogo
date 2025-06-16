@@ -38,7 +38,7 @@ const DefenderSectionContainer = styled.div`
     }
   }
   
-  #table-container {
+  #defender-table-container {
     max-height: calc(100vh - 58px);
     overflow-y: scroll;
   }
@@ -81,7 +81,7 @@ const DefenderSectionContainer = styled.div`
       z-index: 2;
     }
 
-    #table-container {
+    #defender-table-container {
       max-height: unset;
     }
   }
@@ -129,7 +129,8 @@ export default function DefenderSection() {
 
   if (!pokemonId) {
     return <DefenderSectionContainer>
-      <h1 id="defend-header">
+      <hr id="defend-header" className="hidden" />
+      <h1>
         <Shield01Icon />
         Guard
       </h1>
@@ -137,12 +138,13 @@ export default function DefenderSection() {
     </DefenderSectionContainer>;
   }
   return <DefenderSectionContainer>
-    <h1 id="defend-header">
+    <hr id="defend-header" className="hidden" />
+    <h1>
       <Shield01Icon />
       Guard
       <span data-tooltip-id="defender-tooltip">•••</span>
     </h1>
-    <div id="table-container">
+    <div id="defender-table-container">
       <table>
         <thead>
         <tr>

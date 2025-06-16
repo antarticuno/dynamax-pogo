@@ -51,7 +51,7 @@ export default function DefenderExplanation() {
       </li>
       <li>Kingler vs. Suicune
         <ul>
-          <li>In this scenario, Suicune's shields are particularly effective against the majority of Kingler's attacks (water, normal, bug). This might be shocking considering Suicune does not resist any of Kingler's attacks - however, when we consider Suicune's extremely high natural defense stat we can see just how powerful a high defense stat can be when it comes to minimizing incoming neutral type-effective attacks.</li>
+          <li>In this scenario, Suicune's shields are particularly effective against the majority of Kingler's attacks (water, normal, bug). This might be shocking considering Suicune only resists Kingler's water attacks - however, when we consider Suicune's extremely high natural defense stat we can see just how powerful a high defense stat can be when it comes to minimizing incoming neutral type-effective attacks.</li>
         </ul>
       </li>
     </ol>

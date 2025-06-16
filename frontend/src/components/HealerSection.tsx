@@ -38,7 +38,7 @@ const HealerSectionContainer = styled.div`
     }
   }
   
-  #table-container {
+  #healer-table-container {
     max-height: calc(100vh - 58px);
     overflow-y: scroll;
   }
@@ -84,7 +84,7 @@ const HealerSectionContainer = styled.div`
       z-index: 1;
     }
 
-    #table-container {
+    #healer-table-container {
       max-height: unset;
     }
   }
@@ -134,12 +134,13 @@ export default function HealerSection() {
 
 
   return <HealerSectionContainer>
-    <h1 id="heal-header">
+    <hr id="heal-header" className="hidden" />
+    <h1>
       <FavouriteIcon />
       Spirit
       <span data-tooltip-id="healer-tooltip">•••</span>
     </h1>
-    <div id="table-container">
+    <div id="healer-table-container">
       <table>
         <thead>
           <tr>
