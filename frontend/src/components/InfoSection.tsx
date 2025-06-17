@@ -8,7 +8,7 @@ import styled from "styled-components";
 // @ts-ignore
 import NotFound from "../assets/not_found.png";
 import Image from "rc-image";
-import {Menu01Icon} from "hugeicons-react";
+import {ArrowUpDoubleIcon, Menu01Icon} from "hugeicons-react";
 import {Tooltip} from "react-tooltip";
 import Bug from "../assets/icon_bug.png";
 import Dark from "../assets/icon_dark.png";
@@ -57,6 +57,14 @@ const InfoSectionContainer = styled.div`
       margin-top: 5px;
       transform: rotate(180deg);
     }
+
+    & > span {
+      margin: 10px 0;
+      
+      svg {
+        transform: rotate(90deg);
+      }
+    }
   }
 
   .vertical {
@@ -103,13 +111,27 @@ const InfoSectionContainer = styled.div`
     
     h3 {
       font-size: 0.7em;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
       
       img {
         transform: unset;
-        width: 1.3em;
+        width: 1.4em;
+        height: 1.4em;
         margin-top: 0;
         margin-left: 5px;
         vertical-align: middle;
+      }
+      
+      & > span {
+        margin: 0 5px;
+
+        svg {
+          transform: unset;
+          height: 0.9em;
+          width: 0.9em;
+        }
       }
       
       &:last-of-type {
@@ -252,7 +274,12 @@ export default function InfoSection() {
           <h3 className={"capitalize"}>
             {!!currentPokemon?.primaryType && <img src={mapPokemonType(currentPokemon!.primaryType)} title={currentPokemon!.primaryType} alt={currentPokemon!.primaryType} />}
             {!!currentPokemon?.secondaryType && <img src={mapPokemonType(currentPokemon!.secondaryType)} title={currentPokemon!.secondaryType} alt={currentPokemon!.secondaryType} />}
-            {!!currentPokemon && ` • ${currentPokemon.attack} | ${currentPokemon.defense} | ${currentPokemon.stamina}`}
+            <span>
+              {!!currentPokemon?.maxCp && `${currentPokemon.maxCp}`}
+              {!!currentPokemon?.maxCpBoosted && ` • `}
+              {!!currentPokemon?.maxCpBoosted && <ArrowUpDoubleIcon />}
+              {!!currentPokemon?.maxCpBoosted && `${currentPokemon.maxCpBoosted}`}
+            </span>
           </h3>
           {isSelecting ?
             <select

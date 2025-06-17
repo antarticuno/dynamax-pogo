@@ -13,6 +13,8 @@ public class PokemonDTO {
     private int attack;
     private int defense;
     private int stamina;
+    private Integer maxCp;
+    private Integer maxCpBoosted;
     private String imgUrl;
 
     public int getPokemonNumber() {

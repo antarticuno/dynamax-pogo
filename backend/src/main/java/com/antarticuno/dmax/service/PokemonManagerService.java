@@ -67,6 +67,8 @@ public class PokemonManagerService {
                         .attack(pokemonEntity.getAttack())
                         .defense(pokemonEntity.getDefense())
                         .stamina(pokemonEntity.getStamina())
+                        .maxCp(pokemonEntity.getMaxCp())
+                        .maxCpBoosted(pokemonEntity.getMaxCpBoosted())
                         .primaryType(pokemonEntity.getType1())
                         .secondaryType(pokemonEntity.getType2())
                         .imgUrl(pokemonEntity.getImgUrl())

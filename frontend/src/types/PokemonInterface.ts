@@ -7,6 +7,8 @@ export default interface PokemonInterface {
   attack: number,
   defense: number,
   stamina: number,
+  maxCp: number | undefined,
+  maxCpBoosted: number | undefined,
   imgUrl: string | undefined
 
 }
