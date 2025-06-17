@@ -125,4 +125,7 @@ INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VAL
 INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('normal', 'Giga Impact', '200', '888-crowned-sword', 'CHARGED');
 INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('steel', 'Behemoth Blade', '200', '888-crowned-sword', 'CHARGED');
 
+alter table pokemon add column max_cp int(3);
+alter table pokemon add column max_cp_boosted int(3);
+
 ```
