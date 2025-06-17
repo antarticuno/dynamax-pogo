@@ -20,6 +20,10 @@ hr.hidden {
   top: calc(-1 * (16vw + 20px));
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .capitalize {
   text-transform: capitalize;
 }

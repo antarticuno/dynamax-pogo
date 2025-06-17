@@ -10,6 +10,24 @@ import NotFound from "../assets/not_found.png";
 import Image from "rc-image";
 import {Menu01Icon} from "hugeicons-react";
 import {Tooltip} from "react-tooltip";
+import Bug from "../assets/icon_bug.png";
+import Dark from "../assets/icon_dark.png";
+import Dragon from "../assets/icon_dragon.png";
+import Electric from "../assets/icon_electric.png";
+import Fairy from "../assets/icon_fairy.png";
+import Fighting from "../assets/icon_fighting.png";
+import Fire from "../assets/icon_fire.png";
+import Flying from "../assets/icon_flying.png";
+import Ghost from "../assets/icon_ghost.png";
+import Grass from "../assets/icon_grass.png";
+import Ground from "../assets/icon_ground.png";
+import Ice from "../assets/icon_ice.png";
+import Normal from "../assets/icon_normal.png";
+import Poison from "../assets/icon_poison.png";
+import Psychic from "../assets/icon_psychic.png";
+import Rock from "../assets/icon_rock.png";
+import Steel from "../assets/icon_steel.png";
+import Water from "../assets/icon_water.png";
 
 const styleThreshold = 900;
 
@@ -33,6 +51,12 @@ const InfoSectionContainer = styled.div`
   h3 {
     margin: 0;
     font-weight: 200;
+    
+    img {
+      width: 1.5em;
+      margin-top: 5px;
+      transform: rotate(180deg);
+    }
   }
 
   .vertical {
@@ -80,6 +104,14 @@ const InfoSectionContainer = styled.div`
     h3 {
       font-size: 0.7em;
       
+      img {
+        transform: unset;
+        width: 1.3em;
+        margin-top: 0;
+        margin-left: 5px;
+        vertical-align: middle;
+      }
+      
       &:last-of-type {
         text-align: right;
       }
@@ -116,6 +148,28 @@ const BurgerMenu = styled(Tooltip)`
   }
 `;
 
+const PokemonTooltip = styled(Tooltip)`
+  text-transform: capitalize;
+  z-index: 2;
+  
+  div:not(.react-tooltip-arrow) {
+    cursor: pointer;
+    padding: 8px 15px;
+  }
+  
+  ul {
+    margin: 0;
+    padding: 0;
+    
+    li {
+      text-transform: uppercase;
+      list-style-type: none;
+      text-align: center;
+      margin: 0;
+    }
+  }
+`;
+
 export default function InfoSection() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isSelecting, setIsSelecting] = useState<boolean>(!searchParams.get('pokemonId'));
@@ -136,6 +190,49 @@ export default function InfoSection() {
     initialize();
   }, [searchParams]);
 
+  const mapPokemonType = (type?: string) => {
+    switch (type) {
+      case 'bug':
+        return Bug;
+      case 'dark':
+        return Dark;
+      case 'dragon':
+        return Dragon;
+      case 'electric':
+        return Electric;
+      case 'fairy':
+        return Fairy;
+      case 'fighting':
+        return Fighting;
+      case 'fire':
+        return Fire;
+      case 'flying':
+        return Flying;
+      case 'ghost':
+        return Ghost;
+      case 'grass':
+        return Grass;
+      case 'ground':
+        return Ground;
+      case 'ice':
+        return Ice;
+      case 'normal':
+        return Normal;
+      case 'poison':
+        return Poison;
+      case 'psychic':
+        return Psychic;
+      case 'rock':
+        return Rock;
+      case 'steel':
+        return Steel;
+      case 'water':
+        return Water;
+      default:
+        return NotFound;
+    }
+  }
+
   const selectNewPokemon = (newId: string) => {
     setSearchParams({['pokemonId']: newId});
     setIsSelecting(false);
@@ -152,7 +249,11 @@ export default function InfoSection() {
 
       <>
         <div className="vertical">
-          <h3 className={"capitalize"}>{currentPokemon?.primaryType}{!!currentPokemon?.secondaryType && ` · ${currentPokemon!.secondaryType}`}</h3>
+          <h3 className={"capitalize"}>
+            {!!currentPokemon?.primaryType && <img src={mapPokemonType(currentPokemon!.primaryType)} title={currentPokemon!.primaryType} alt={currentPokemon!.primaryType} />}
+            {!!currentPokemon?.secondaryType && <img src={mapPokemonType(currentPokemon!.secondaryType)} title={currentPokemon!.secondaryType} alt={currentPokemon!.secondaryType} />}
+            {!!currentPokemon && ` • ${currentPokemon.attack} | ${currentPokemon.defense} | ${currentPokemon.stamina}`}
+          </h3>
           {isSelecting ?
             <select
               id={"pokemon-selector"}
@@ -169,9 +270,21 @@ export default function InfoSection() {
             <h1 className="capitalize clickable" onClick={() => setIsSelecting(true)}>{currentPokemon?.pokemonName}</h1>}
         </div>
         {currentPokemon!! && (
-        <Image src={currentPokemon!.imgUrl}
-                      alt={currentPokemon!.pokemonName}
-                      fallback={NotFound} />
+          <>
+            <Image src={currentPokemon!.imgUrl}
+                          alt={currentPokemon!.pokemonName}
+                          fallback={NotFound}
+                          data-tooltip-id={`selected-pokemon-${currentPokemon!.pokemonNumber}`}
+                          className="clickable" />
+            <PokemonTooltip id={`selected-pokemon-${currentPokemon!.pokemonNumber}`}>
+              {currentPokemon?.pokemonName}
+              <ul>
+                <li>ATK: {currentPokemon?.attack}</li>
+                <li>DEF: {currentPokemon?.defense}</li>
+                <li>STA: {currentPokemon?.stamina}</li>
+              </ul>
+            </PokemonTooltip>
+          </>
         )}
       </>
     <div className="vertical">
