@@ -17,6 +17,10 @@ public class DefenderPokemonDTO {
 
     private String pokemonImgUrl;
 
+    private int pokemonAttack;
+
+    private int pokemonDefense;
+
     private int pokemonStamina;
 
     private Double averageDamageReceived;

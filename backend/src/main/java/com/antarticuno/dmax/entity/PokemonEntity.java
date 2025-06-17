@@ -23,10 +23,14 @@ import java.util.Objects;
                 "  (case when attacker.type_1 = max_move.type or coalesce(attacker.type_2, '') = max_move.type then 1.2 else 1 end) *\n" +
                 "  coalesce(tm1.multiplier, 1) *\n" +
                 "  coalesce(tm2.multiplier, 1)\n" +
+                "  + 1\n" +
                 ") as damage, \n" +
                 "attacker.pokemon_id as pokemon_id, \n" +
                 "(case when max_move.name like 'G-Max%' then concat('gigantamax ', attacker.name) else attacker.name end) as attacker_name, \n" +
                 "(case when max_move.name like 'G-Max%' then attacker.gmax_img_url else attacker.img_url end) as img_url, \n" +
+                "attacker.attack as attacker_attack,\n" +
+                "attacker.defense as attacker_defense,\n" +
+                "attacker.stamina as attacker_stamina,\n" +
                 "max_move.name as max_move_name\n" +
                 "from pokemon attacker \n" +
                 "join max_move using (pokemon_id)\n" +
@@ -46,6 +50,9 @@ import java.util.Objects;
                         @ColumnResult(name = "pokemon_id", type = String.class),
                         @ColumnResult(name = "attacker_name", type = String.class),
                         @ColumnResult(name = "img_url", type = String.class),
+                        @ColumnResult(name = "attacker_attack", type = Integer.class),
+                        @ColumnResult(name = "attacker_defense", type = Integer.class),
+                        @ColumnResult(name = "attacker_stamina", type = Integer.class),
                         @ColumnResult(name = "max_move_name", type = String.class),
                         @ColumnResult(name = "damage", type = Integer.class)
                 }
@@ -59,10 +66,13 @@ import java.util.Objects;
                 "  (case when boss.type_1 = move.type or coalesce(boss.type_2, '') = move.type then 1.2 else 1 end) *\n" +
                 "  coalesce(tm1.multiplier, 1) *\n" +
                 "  coalesce(tm2.multiplier, 1)\n" +
+                "  + 1\n" +
                 ") as damage,\n" +
                 "move.name as move_name,\n" +
                 "defender.name as defender_name,\n" +
                 "defender.img_url as defender_img_url,\n" +
+                "defender.attack as defender_attack,\n" +
+                "defender.defense as defender_defense,\n" +
                 "defender.stamina as defender_stamina,\n" +
                 "defender.pokemon_id as pokemon_id\n" +
                 "from pokemon boss\n" +
@@ -84,6 +94,8 @@ import java.util.Objects;
                         @ColumnResult(name = "pokemon_id", type = String.class),
                         @ColumnResult(name = "defender_name", type = String.class),
                         @ColumnResult(name = "defender_img_url", type = String.class),
+                        @ColumnResult(name = "defender_attack", type = Integer.class),
+                        @ColumnResult(name = "defender_defense", type = Integer.class),
                         @ColumnResult(name = "defender_stamina", type = Integer.class),
                         @ColumnResult(name = "move_name", type = String.class),
                         @ColumnResult(name = "damage", type = Integer.class)

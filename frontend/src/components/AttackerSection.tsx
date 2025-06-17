@@ -105,6 +105,26 @@ const ConfigureTooltip = styled(Tooltip)`
   }
 `;
 
+const AttackerTooltip = styled(Tooltip)`
+  text-transform: capitalize;
+  
+  div:not(.react-tooltip-arrow) {
+    cursor: pointer;
+    padding: 8px 15px;
+  }
+  
+  ul {
+    margin: 0;
+    padding: 0;
+    
+    li {
+      text-transform: uppercase;
+      list-style-type: none;
+      margin: 0;
+    }
+  }
+`;
+
 export default function AttackerSection() {
   const [searchParams, _setSearchParams] = useSearchParams();
   const pokemonId = searchParams.get('pokemonId');
@@ -154,7 +174,16 @@ export default function AttackerSection() {
           return <tr key={`attacker-${idx}`}>
             <td className="preview-image">
               <Image src={attacker.pokemonImgUrl}
-                       fallback={NotFound} />
+                     fallback={NotFound}
+                     data-tooltip-id={`attacker-tooltip-${idx}`}/>
+              <AttackerTooltip id={`attacker-tooltip-${idx}`}>
+                {attacker.pokemonName}
+                <ul>
+                  <li>ATK: {attacker.pokemonAttack}</li>
+                  <li>DEF: {attacker.pokemonDefense}</li>
+                  <li>STA: {attacker.pokemonStamina}</li>
+                </ul>
+              </AttackerTooltip>
             </td>
             <td className="capitalize">{attacker.pokemonName}</td>
             <td>{attacker.maxMoveName}</td>

@@ -108,6 +108,26 @@ const ConfigureTooltip = styled(Tooltip)`
   }
 `;
 
+const DefenderTooltip = styled(Tooltip)`
+  text-transform: capitalize;
+  
+  div:not(.react-tooltip-arrow) {
+    cursor: pointer;
+    padding: 8px 15px;
+  }
+  
+  ul {
+    margin: 0;
+    padding: 0;
+    
+    li {
+      text-transform: uppercase;
+      list-style-type: none;
+      margin: 0;
+    }
+  }
+`;
+
 export default function DefenderSection() {
   const [searchParams, _setSearchParams] = useSearchParams();
   const pokemonId = searchParams.get('pokemonId');
@@ -165,7 +185,16 @@ export default function DefenderSection() {
                     <>
                       <td className="preview-image" rowSpan={defenderPokemon.length}>
                         <Image src={dpkmn.pokemonImgUrl}
-                               fallback={NotFound} />
+                               fallback={NotFound}
+                               data-tooltip-id={`defender-tooltip-${dpkmn.pokemonId}`} />
+                        <DefenderTooltip id={`defender-tooltip-${dpkmn.pokemonId}`}>
+                          {dpkmn.pokemonName}
+                          <ul>
+                            <li>ATK: {dpkmn.pokemonAttack}</li>
+                            <li>DEF: {dpkmn.pokemonDefense}</li>
+                            <li>STA: {dpkmn.pokemonStamina}</li>
+                          </ul>
+                        </DefenderTooltip>
                       </td>
                       <td className="capitalize preview-image" rowSpan={defenderPokemon.length}>{dpkmn.pokemonName}</td>
                     </>

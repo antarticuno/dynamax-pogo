@@ -59,6 +59,8 @@ public class MaxMoveCalculator {
                             .pokemonName(defenderName)
                             .pokemonImgUrl(damageCalcs.stream().map(DefenderPokemonResultInfoDTO::getPokemonImgUrl).findFirst().orElseThrow())
                             .pokemonId(damageCalcs.stream().map(DefenderPokemonResultInfoDTO::getPokemonId).findFirst().orElseThrow())
+                            .pokemonAttack(damageCalcs.stream().map(DefenderPokemonResultInfoDTO::getPokemonAttack).findFirst().orElseThrow())
+                            .pokemonDefense(damageCalcs.stream().map(DefenderPokemonResultInfoDTO::getPokemonDefense).findFirst().orElseThrow())
                             .pokemonStamina(damageCalcs.stream().map(DefenderPokemonResultInfoDTO::getPokemonStamina).findFirst().orElseThrow())
                             .damageCalculations(damageCalcs.stream()
                                     .map(damageCalc -> DefenderPokemonDTO.DamageCalc.builder()

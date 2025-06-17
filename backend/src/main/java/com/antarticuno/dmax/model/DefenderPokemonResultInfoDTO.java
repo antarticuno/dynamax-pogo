@@ -15,6 +15,10 @@ public class DefenderPokemonResultInfoDTO {
 
     private String pokemonImgUrl;
 
+    private int pokemonAttack;
+
+    private int pokemonDefense;
+
     private int pokemonStamina;
 
     private String moveName;

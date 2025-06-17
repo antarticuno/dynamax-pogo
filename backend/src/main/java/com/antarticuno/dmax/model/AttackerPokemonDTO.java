@@ -15,6 +15,12 @@ public class AttackerPokemonDTO {
 
     private String pokemonImgUrl;
 
+    private Integer pokemonAttack;
+
+    private Integer pokemonDefense;
+
+    private Integer pokemonStamina;
+
     private String maxMoveName;
 
     private int damage;
