@@ -110,8 +110,8 @@ INSERT INTO `pogo`.`pokemon` (`name`, `attack`, `defense`, `stamina`, `type_1`, 
 UPDATE `pogo`.`pokemon` SET `type_2` = NULL, `img_url` = 'https://assets.dittobase.com/go/pokemon/888-zacian-hero.png' WHERE (`pokemon_id` = '888');
 UPDATE `pogo`.`pokemon` SET `type_2` = NULL, `img_url` = 'https://assets.dittobase.com/go/pokemon/889-zamazenta-hero.png' WHERE (`pokemon_id` = '889');
 INSERT INTO `pogo`.`pokemon` (`name`, `attack`, `defense`, `stamina`, `type_1`, `type_2`, `img_url`, `max_available`, `pokemon_id`) VALUES ('zamazenta (crowned)', '250', '292', '192', 'fighting', 'steel', 'https://assets.dittobase.com/go/pokemon/889-zamazenta.png', '1', '889-crowned-shield');
-INSERT INTO `pogo`.`max_move` (`type`, `name`, `power`, `pokemon_id`) VALUES ('steel', 'Behemoth Bash', '350', '889');
-INSERT INTO `pogo`.`max_move` (`type`, `name`, `power`, `pokemon_id`) VALUES ('steel', 'Behemoth Blade', '350', '888');
+INSERT INTO `pogo`.`max_move` (`type`, `name`, `power`, `pokemon_id`) VALUES ('steel', 'Behemoth Bash', '350', '889-crowned-shield');
+INSERT INTO `pogo`.`max_move` (`type`, `name`, `power`, `pokemon_id`) VALUES ('steel', 'Behemoth Blade', '350', '888-crowned-sword');
 INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('steel', 'Metal Claw', '6', '889-crowned-shield', 'FAST');
 INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('ice', 'Ice Fang', '12', '889-crowned-shield', 'FAST');
 INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('fairy', 'Moonblast', '130', '889-crowned-shield', 'CHARGED');
