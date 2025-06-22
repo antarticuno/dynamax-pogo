@@ -67,12 +67,30 @@ public class PokemonManagerService {
                         .attack(pokemonEntity.getAttack())
                         .defense(pokemonEntity.getDefense())
                         .stamina(pokemonEntity.getStamina())
-                        .maxCp(pokemonEntity.getMaxCp())
-                        .maxCpBoosted(pokemonEntity.getMaxCpBoosted())
+                        // 0.5974 = Level 20 CP Multiplier
+                        .maxCp(maxCPCalculator(pokemonEntity.getAttack(), pokemonEntity.getDefense(), pokemonEntity.getStamina(), 0.5974))
+                        // 0.667934 = Level 25 CP Multiplier
+                        .maxCpBoosted(maxCPCalculator(pokemonEntity.getAttack(), pokemonEntity.getDefense(), pokemonEntity.getStamina(), 0.667934))
                         .primaryType(pokemonEntity.getType1())
                         .secondaryType(pokemonEntity.getType2())
                         .imgUrl(pokemonEntity.getImgUrl())
                         .build();
+    }
+
+    /**
+     * Calculates the max cp assuming 15/15/15 stats.
+     * @param baseAttack
+     * @param baseDefense
+     * @param baseStamina
+     * @param cpMultiplier
+     * @return
+     */
+    protected int maxCPCalculator(int baseAttack, int baseDefense, int baseStamina, double cpMultiplier) {
+        return (int) Math.floor(Math.max(10,
+                (baseAttack + 15) *
+                Math.pow((baseDefense + 15), 0.5) *
+                Math.pow((baseStamina + 15), 0.5) *
+                Math.pow(cpMultiplier, 2) / 10));
     }
 
     /**

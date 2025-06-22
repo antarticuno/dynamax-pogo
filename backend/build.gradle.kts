@@ -18,6 +18,7 @@ repositories {
 }
 
 dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     compileOnly("org.projectlombok:lombok:1.18.36")
     implementation("org.json:json:20250107")
     implementation("org.apache.commons:commons-collections4:4.4")
@@ -36,4 +37,8 @@ dependencies {
 
 springBoot {
     mainClass.set("com.antarticuno.dmax.MainApplication") // Replace with your main class path
+}
+
+tasks.test {
+    useJUnitPlatform()  // REQUIRED for JUnit 5 to work
 }

@@ -135,14 +135,6 @@ public class PokemonEntity {
     @Column(name = "max_available")
     private boolean maxAvailable;
 
-    @Basic
-    @Column(name = "max_cp")
-    private Integer maxCp;
-
-    @Basic
-    @Column(name = "max_cp_boosted")
-    private Integer maxCpBoosted;
-
     @Id
     @Column(name = "pokemon_id")
     private String pokemonKey;

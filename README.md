@@ -125,31 +125,7 @@ INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VAL
 INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('normal', 'Giga Impact', '200', '888-crowned-sword', 'CHARGED');
 INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('steel', 'Behemoth Blade', '200', '888-crowned-sword', 'CHARGED');
 
-alter table pokemon add column max_cp int(3);
-alter table pokemon add column max_cp_boosted int(3);
-UPDATE `pogo`.`pokemon` SET `max_cp` = NULL, `max_cp_boosted` = NULL WHERE (`pokemon_id` = '12');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1509', `max_cp_boosted` = '1886' WHERE (`pokemon_id` = '131');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1843', `max_cp_boosted` = '2304' WHERE (`pokemon_id` = '143');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1743', `max_cp_boosted` = '2179' WHERE (`pokemon_id` = '144');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '2015', `max_cp_boosted` = '2519' WHERE (`pokemon_id` = '145');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1980', `max_cp_boosted` = '2475' WHERE (`pokemon_id` = '146');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1972', `max_cp_boosted` = '2466' WHERE (`pokemon_id` = '243');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1984', `max_cp_boosted` = '2480' WHERE (`pokemon_id` = '244');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1704', `max_cp_boosted` = '2130' WHERE (`pokemon_id` = '245');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1554', `max_cp_boosted` = '1943' WHERE (`pokemon_id` = '3');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '843', `max_cp_boosted` = '1054' WHERE (`pokemon_id` = '302');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1651', `max_cp_boosted` = '2064' WHERE (`pokemon_id` = '6');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1598', `max_cp_boosted` = '1998' WHERE (`pokemon_id` = '615');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1746', `max_cp_boosted` = '2183' WHERE (`pokemon_id` = '68');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1733', `max_cp_boosted` = '2166' WHERE (`pokemon_id` = '766');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1899', `max_cp_boosted` = '2374' WHERE (`pokemon_id` = '812');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1724', `max_cp_boosted` = '2156' WHERE (`pokemon_id` = '815');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1693', `max_cp_boosted` = '2117' WHERE (`pokemon_id` = '818');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1486', `max_cp_boosted` = '1858' WHERE (`pokemon_id` = '849');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1347', `max_cp_boosted` = '1683' WHERE (`pokemon_id` = '870');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1409', `max_cp_boosted` = '1761' WHERE (`pokemon_id` = '9');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1644', `max_cp_boosted` = '2055' WHERE (`pokemon_id` = '94');
-UPDATE `pogo`.`pokemon` SET `max_cp` = '1616', `max_cp_boosted` = '2020' WHERE (`pokemon_id` = '99');
-
+-- insert into move values ('bug', 'Fury Cutter', 4, '376', null, 'FAST');
+-- insert into max_move values ('bug', 'Max Flutterby', 350, '376', null);
 
 ```
