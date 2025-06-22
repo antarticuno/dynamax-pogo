@@ -11,7 +11,7 @@ import HealerExplanation from "./HealerExplanation";
 import {Tooltip} from "react-tooltip";
 import CustomModalContext from "./CustomModalContext";
 
-const styleThreshold = 900;
+const styleThreshold = 1024;
 
 const HealerSectionContainer = styled.div`
   width: 28vw;
@@ -86,6 +86,27 @@ const HealerSectionContainer = styled.div`
 
     #healer-table-container {
       max-height: unset;
+    }
+  }
+
+  @media print {
+    font-size: 0.8em;
+    color: #242424;
+    
+    img {
+      display: none;
+    }
+
+    table {
+
+      td.capitalize {
+        font-weight: 600;
+      }
+
+      td.damage {
+        text-shadow: unset;
+        font-weight: 800;
+      }
     }
   }
 `;

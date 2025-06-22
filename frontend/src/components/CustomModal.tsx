@@ -3,7 +3,7 @@ import {ReactNode, useContext} from "react";
 import CustomModalContext from "./CustomModalContext";
 import {ArrowTurnBackwardIcon} from "hugeicons-react";
 
-const styleThreshold = 900;
+const styleThreshold = 1024;
 
 const StyledModal = styled.div`
   position: fixed;

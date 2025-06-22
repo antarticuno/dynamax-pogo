@@ -12,7 +12,7 @@ import AttackerExplanation from "./AttackerExplanation";
 import CustomModalContext from "./CustomModalContext";
 import {Tooltip} from "react-tooltip";
 
-const styleThreshold = 900;
+const styleThreshold = 1024;
 
 const AttackerSectionContainer = styled.div`
   width: 28vw;
@@ -86,6 +86,27 @@ const AttackerSectionContainer = styled.div`
 
     #attacker-table-container {
       max-height: unset;
+    }
+  }
+
+  @media print {
+    font-size: 0.8em;
+    color: #242424;
+    
+    img {
+      display: none;
+    }
+
+    table {
+
+      td.capitalize {
+        font-weight: 600;
+      }
+      
+      td.damage {
+        text-shadow: unset;
+        font-weight: 800;
+      }
     }
   }
 `;

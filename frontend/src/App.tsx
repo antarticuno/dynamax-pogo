@@ -7,7 +7,7 @@ import InfoSection from "./components/InfoSection";
 import PokeballBg from "./assets/pokeball.png";
 import {CustomModalContextProvider} from "./components/CustomModalContext";
 
-const styleThreshold = 900;
+const styleThreshold = 1024;
 
 const AppContainer = styled.div`
   display: flex;

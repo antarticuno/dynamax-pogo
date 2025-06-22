@@ -12,7 +12,7 @@ import DefenderExplanation from "./DefenderExplanation";
 import { Tooltip } from 'react-tooltip';
 import CustomModalContext from "./CustomModalContext";
 
-const styleThreshold = 900;
+const styleThreshold = 1024;
 
 const DefenderSectionContainer = styled.div`
   width: 29vw;
@@ -60,11 +60,16 @@ const DefenderSectionContainer = styled.div`
     }
     
     td.damage {
+      width: 15%;
       font-weight: 500;
       text-shadow: -1px -1px 0px #555, 1px -1px 0px #555, -1px 1px 0px #555, 1px 1px 0px #555;
       padding: 2px 8px;
       font-size: 1.2em;
       text-align: right;
+    }
+    
+    td.move-name {
+      width: 100%;
     }
 
     img {
@@ -83,6 +88,42 @@ const DefenderSectionContainer = styled.div`
 
     #defender-table-container {
       max-height: unset;
+    }
+    
+    table {
+      table-layout: fixed;
+      width: 100%;
+      
+      td.preview-image.capitalize {
+        text-align: left;
+      }
+      
+      td.damage {
+        width: unset;
+      }
+    }
+  }
+  
+  @media print {
+    font-size: 0.8em;
+    color: #242424;
+    
+    img {
+      display: none;
+    }
+    
+    table {
+      width: 100%;
+      
+      td.capitalize {
+        font-weight: 600;
+        text-align: left;
+      }
+
+      td.damage {
+        text-shadow: unset;
+        font-weight: 800;
+      }
     }
   }
 `;
@@ -199,7 +240,7 @@ export default function DefenderSection() {
                       <td className="capitalize preview-image" rowSpan={defenderPokemon.length}>{dpkmn.pokemonName}</td>
                     </>
                   }
-                  <td>{move.moveName}</td>
+                  <td className="move-name">{move.moveName}</td>
                   <td className="damage" style={{background: colorScale(move.damage)}}>{move.damage}</td>
                 </tr>)
               })}

@@ -29,7 +29,7 @@ import Rock from "../assets/icon_rock.png";
 import Steel from "../assets/icon_steel.png";
 import Water from "../assets/icon_water.png";
 
-const styleThreshold = 900;
+const styleThreshold = 1024;
 
 const InfoSectionContainer = styled.div`
   display: flex;
@@ -149,6 +149,10 @@ const InfoSectionContainer = styled.div`
       width: 15vw;
       height: 15vw;
     }
+  }
+  
+  @media print {
+    color: #242424;
   }
 `;
 
