@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">dynamax-pogo</string>
+    <string name="title_activity_main">dynamax-pogo</string>
+    <string name="package_name">com.antarticuno.dmax</string>
+    <string name="custom_url_scheme">com.antarticuno.dmax</string>
+</resources>
