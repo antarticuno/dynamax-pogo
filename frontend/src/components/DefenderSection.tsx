@@ -224,7 +224,7 @@ export default function DefenderSection() {
                 return (<tr key={`defender-${dpkmn.pokemonName}-${idx}`}>
                   {idx === 0 &&
                     <>
-                      <td className="preview-image" rowSpan={defenderPokemon.length}>
+                      <td className="preview-image" rowSpan={dpkmn.damageCalculations.length}>
                         <Image src={dpkmn.pokemonImgUrl}
                                fallback={NotFound}
                                data-tooltip-id={`defender-tooltip-${dpkmn.pokemonId}`} />
@@ -237,7 +237,7 @@ export default function DefenderSection() {
                           </ul>
                         </DefenderTooltip>
                       </td>
-                      <td className="capitalize preview-image" rowSpan={defenderPokemon.length}>{dpkmn.pokemonName}</td>
+                      <td className="capitalize preview-image" rowSpan={dpkmn.damageCalculations.length}>{dpkmn.pokemonName}</td>
                     </>
                   }
                   <td className="move-name">{move.moveName}</td>
