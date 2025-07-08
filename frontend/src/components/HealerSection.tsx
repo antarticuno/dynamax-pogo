@@ -174,7 +174,9 @@ export default function HealerSection() {
             return <tr key={`healer-${idx}`}>
               <td className="preview-image">
                 <Image src={healer.pokemonImgUrl}
-                       fallback={NotFound} />
+                       fallback={NotFound}
+                       preview={false}
+                />
               </td>
               <td className="capitalize">{healer.pokemonName}</td>
               <td className="damage">{healer.maxHealingAmount}</td>

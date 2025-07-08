@@ -227,7 +227,9 @@ export default function DefenderSection() {
                       <td className="preview-image" rowSpan={dpkmn.damageCalculations.length}>
                         <Image src={dpkmn.pokemonImgUrl}
                                fallback={NotFound}
-                               data-tooltip-id={`defender-tooltip-${dpkmn.pokemonId}`} />
+                               data-tooltip-id={`defender-tooltip-${dpkmn.pokemonId}`}
+                               preview={false}
+                        />
                         <DefenderTooltip id={`defender-tooltip-${dpkmn.pokemonId}`}>
                           {dpkmn.pokemonName}
                           <ul>

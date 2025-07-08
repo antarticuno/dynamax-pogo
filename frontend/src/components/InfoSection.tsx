@@ -41,7 +41,7 @@ const InfoSectionContainer = styled.div`
 
   h1 {
     margin: 0;
-    
+
     &.clickable:hover {
       color: #FFF;
       cursor: pointer;
@@ -51,7 +51,7 @@ const InfoSectionContainer = styled.div`
   h3 {
     margin: 0;
     font-weight: 200;
-    
+
     img {
       width: 1.5em;
       margin-top: 5px;
@@ -60,7 +60,7 @@ const InfoSectionContainer = styled.div`
 
     & > span {
       margin: 10px 0;
-      
+
       svg {
         transform: rotate(90deg);
       }
@@ -71,7 +71,7 @@ const InfoSectionContainer = styled.div`
     writing-mode: vertical-lr;
     transform: rotate(180deg);
   }
-  
+
   .rc-image {
     text-align: center;
     border-radius: 50%;
@@ -81,15 +81,15 @@ const InfoSectionContainer = styled.div`
     background-size: cover;
     transform: rotate(40deg);
     margin: 20px 0;
-    
+
     img {
       width: auto;
       height: 100%;
       transform: rotate(-40deg);
     }
   }
-  
-  @media(max-width: ${styleThreshold}px) {
+
+  @media (max-width: ${styleThreshold}px) {
     flex-direction: row;
     position: sticky;
     z-index: 3;
@@ -98,23 +98,23 @@ const InfoSectionContainer = styled.div`
     max-width: 100vw;
     background-color: #242424;
     border-bottom: 10px double #fff;
-    
+
     h1 {
       font-size: 1em;
-      
+
       &.clickable::after {
         content: '\u2304';
         vertical-align: text-bottom;
         margin-left: 3px;
       }
     }
-    
+
     h3 {
       font-size: 0.7em;
       display: flex;
       flex-direction: row-reverse;
       align-items: center;
-      
+
       img {
         transform: unset;
         width: 1.4em;
@@ -123,7 +123,7 @@ const InfoSectionContainer = styled.div`
         margin-left: 5px;
         vertical-align: middle;
       }
-      
+
       & > span {
         margin: 0 5px;
 
@@ -133,24 +133,24 @@ const InfoSectionContainer = styled.div`
           width: 0.9em;
         }
       }
-      
+
       &:last-of-type {
         text-align: right;
       }
     }
-    
+
     .vertical {
       writing-mode: lr;
       transform: none;
     }
-    
+
     .rc-image {
       margin: 0 10px;
       width: 15vw;
       height: 15vw;
     }
   }
-  
+
   @media print {
     color: #242424;
   }
@@ -162,7 +162,7 @@ const BurgerMenu = styled(Tooltip)`
     margin: 0;
     width: 100%;
     height: 100%;
-    
+
     li {
       cursor: pointer;
       padding: 5px 15px;
@@ -177,16 +177,16 @@ const BurgerMenu = styled(Tooltip)`
 const PokemonTooltip = styled(Tooltip)`
   text-transform: capitalize;
   z-index: 2;
-  
+
   div:not(.react-tooltip-arrow) {
     cursor: pointer;
     padding: 8px 15px;
   }
-  
+
   ul {
     margin: 0;
     padding: 0;
-    
+
     li {
       text-transform: uppercase;
       list-style-type: none;
@@ -267,59 +267,67 @@ export default function InfoSection() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ block: "start", behavior: "smooth" });
+      element.scrollIntoView({block: "start", behavior: "smooth"});
     }
   };
 
   return <InfoSectionContainer>
 
-      <>
-        <div className="vertical">
-          <h3 className={"capitalize"}>
-            {!!currentPokemon?.primaryType && <img src={mapPokemonType(currentPokemon!.primaryType)} title={currentPokemon!.primaryType} alt={currentPokemon!.primaryType} />}
-            {!!currentPokemon?.secondaryType && <img src={mapPokemonType(currentPokemon!.secondaryType)} title={currentPokemon!.secondaryType} alt={currentPokemon!.secondaryType} />}
-            <span>
+    <>
+      <div className="vertical">
+        <h3 className={"capitalize"}>
+          {!!currentPokemon?.primaryType &&
+            <img src={mapPokemonType(currentPokemon!.primaryType)} title={currentPokemon!.primaryType}
+                 alt={currentPokemon!.primaryType}/>}
+          {!!currentPokemon?.secondaryType &&
+            <img src={mapPokemonType(currentPokemon!.secondaryType)} title={currentPokemon!.secondaryType}
+                 alt={currentPokemon!.secondaryType}/>}
+          <span>
               {!!currentPokemon?.maxCp && `${currentPokemon.maxCp}`}
-              {!!currentPokemon?.maxCpBoosted && ` • `}
-              {!!currentPokemon?.maxCpBoosted && <ArrowUpDoubleIcon />}
-              {!!currentPokemon?.maxCpBoosted && `${currentPokemon.maxCpBoosted}`}
+            {!!currentPokemon?.maxCpBoosted && ` • `}
+            {!!currentPokemon?.maxCpBoosted && <ArrowUpDoubleIcon/>}
+            {!!currentPokemon?.maxCpBoosted && `${currentPokemon.maxCpBoosted}`}
             </span>
-          </h3>
-          {isSelecting ?
-            <select
-              id={"pokemon-selector"}
-              value={currentPokemon?.pokemonId}
-              onChange={(e) => selectNewPokemon(e.target.value)}
-              onBlur={() => setIsSelecting(false)}
-            >
-              <option key={-1} value={''}>--select--</option>
-              {allPokemon.map(pkmn => {
-                return <option key={`select-${pkmn.pokemonId}`} value={pkmn.pokemonId} className={"capitalize"}>{pkmn.pokemonName} - #{pkmn.pokemonNumber}</option>;
-              })}
-            </select>
-            :
-            <h1 className="capitalize clickable" onClick={() => setIsSelecting(true)}>{currentPokemon?.pokemonName}</h1>}
-        </div>
-        {currentPokemon!! && (
-          <>
-            <Image src={currentPokemon!.imgUrl}
-                          alt={currentPokemon!.pokemonName}
-                          fallback={NotFound}
-                          data-tooltip-id={`selected-pokemon-${currentPokemon!.pokemonNumber}`}
-                          className="clickable" />
-            <PokemonTooltip id={`selected-pokemon-${currentPokemon!.pokemonNumber}`}>
-              {currentPokemon?.pokemonName}
-              <ul>
-                <li>ATK: {currentPokemon?.attack}</li>
-                <li>DEF: {currentPokemon?.defense}</li>
-                <li>STA: {currentPokemon?.stamina}</li>
-              </ul>
-            </PokemonTooltip>
-          </>
-        )}
-      </>
+        </h3>
+        {isSelecting ?
+          <select
+            id={"pokemon-selector"}
+            value={currentPokemon?.pokemonId}
+            onChange={(e) => selectNewPokemon(e.target.value)}
+            onBlur={() => setIsSelecting(false)}
+          >
+            <option key={-1} value={''}>--select--</option>
+            {allPokemon.map(pkmn => {
+              return <option key={`select-${pkmn.pokemonId}`} value={pkmn.pokemonId}
+                             className={"capitalize"}>{pkmn.pokemonName} - #{pkmn.pokemonNumber}</option>;
+            })}
+          </select>
+          :
+          <h1 className="capitalize clickable" onClick={() => setIsSelecting(true)}>{currentPokemon?.pokemonName}</h1>}
+      </div>
+      {currentPokemon!! && (
+        <>
+          <Image src={currentPokemon!.imgUrl}
+                 alt={currentPokemon!.pokemonName}
+                 fallback={NotFound}
+                 data-tooltip-id={`selected-pokemon-${currentPokemon!.pokemonNumber}`}
+                 className="clickable"
+                 preview={false}
+          />
+          <PokemonTooltip id={`selected-pokemon-${currentPokemon!.pokemonNumber}`}>
+            {currentPokemon?.pokemonName}
+            <ul>
+              <li>ATK: {currentPokemon?.attack}</li>
+              <li>DEF: {currentPokemon?.defense}</li>
+              <li>STA: {currentPokemon?.stamina}</li>
+            </ul>
+          </PokemonTooltip>
+        </>
+      )}
+    </>
     <div className="vertical">
-      <h3>{window.matchMedia(`(max-width: ${styleThreshold}px)`).matches ? <Menu01Icon height={20} width={20} data-tooltip-id="burger" /> : ' '}</h3>
+      <h3>{window.matchMedia(`(max-width: ${styleThreshold}px)`).matches ?
+        <Menu01Icon height={20} width={20} data-tooltip-id="burger"/> : ' '}</h3>
       <h1>Dynamax Guide</h1>
     </div>
     <BurgerMenu id="burger" variant={'light'} place={'bottom-end'} noArrow clickable openOnClick>

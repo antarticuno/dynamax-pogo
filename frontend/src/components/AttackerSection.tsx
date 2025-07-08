@@ -196,7 +196,9 @@ export default function AttackerSection() {
             <td className="preview-image">
               <Image src={attacker.pokemonImgUrl}
                      fallback={NotFound}
-                     data-tooltip-id={`attacker-tooltip-${idx}`}/>
+                     data-tooltip-id={`attacker-tooltip-${idx}`}
+                     preview={false}
+              />
               <AttackerTooltip id={`attacker-tooltip-${idx}`}>
                 {attacker.pokemonName}
                 <ul>
