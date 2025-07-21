@@ -20,7 +20,7 @@ import java.util.Objects;
         query = "select floor(\n" +
                 "  (attacker.attack / boss.defense) * \n" +
                 "  (power / 2) * \n" +
-                "  (case when attacker.type_1 = max_move.type or coalesce(attacker.type_2, '') = max_move.type then 1.2 else 1 end) *\n" +
+                "  (case when attacker.type_1 = max_move.type or coalesce(attacker.type_2, '') = max_move.type then 1.25 else 1 end) *\n" +
                 "  coalesce(tm1.multiplier, 1) *\n" +
                 "  coalesce(tm2.multiplier, 1)\n" +
                 "  + 1\n" +
@@ -63,7 +63,7 @@ import java.util.Objects;
         query = "select floor(\n" +
                 "  (boss.attack / defender.defense) * \n" +
                 "  (power / 2) * \n" +
-                "  (case when boss.type_1 = move.type or coalesce(boss.type_2, '') = move.type then 1.2 else 1 end) *\n" +
+                "  (case when boss.type_1 = move.type or coalesce(boss.type_2, '') = move.type then 1.25 else 1 end) *\n" +
                 "  coalesce(tm1.multiplier, 1) *\n" +
                 "  coalesce(tm2.multiplier, 1)\n" +
                 "  + 1\n" +
