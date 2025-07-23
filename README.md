@@ -128,4 +128,13 @@ INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VAL
 -- insert into move values ('bug', 'Fury Cutter', 4, '376', null, 'FAST');
 -- insert into max_move values ('bug', 'Max Flutterby', 350, '376', null);
 
+-- Eternamax Eternatus
+INSERT INTO `pogo`.`pokemon` (`name`, `attack`, `defense`, `stamina`, `type_1`, `type_2`, `img_url`, `max_available`, `pokemon_id`) VALUES ('eternatus (eternamax)', '251', '505', '452', 'poison', 'dragon', 'https://assets.dittobase.com/home/10190-eternatus-eternamax.png', '0', '890-eternamax-eternatus');
+INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('normal', 'Hyper Beam', '150', '890-eternamax-eternatus', 'CHARGED');
+INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('fire', 'Flamethrower', '65', '890-eternamax-eternatus', 'CHARGED');
+INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('dragon', 'Dragon Pulse', '90', '890-eternamax-eternatus', 'CHARGED');
+INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('poison', 'Sludge Bomb', '85', '890-eternamax-eternatus', 'CHARGED');
+INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('poison', 'Poison Jab', '13', '890-eternamax-eternatus', 'FAST');
+INSERT INTO `pogo`.`move` (`type`, `name`, `power`, `pokemon_id`, `variant`) VALUES ('dragon', 'Dragon Tail', '14', '890-eternamax-eternatus', 'FAST');
+
 ```
